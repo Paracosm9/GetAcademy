@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.115С</title>
+    <style>
+    #app {
+        display: grid;
+        grid-template-columns: auto  0.5fr;
+        grid-template-rows: 20%;
+        justify-items: center;
+        align-items: end;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+    #header {
+        text-align: center;
+    }
+    #test {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 1fr;
+        align-items: start;
+    }
+
+
+    </style>
+</head>
+<body> 
+    <h3 id = "header">Mitt skjema</h3>
+    <div id="app">
+        
+        First Name <input type="text"><br/>
+        Last Name <input type="text"><br/>
+        En til hundre <input type="range"><br/>
+        Skriv inn et tall<input type="number"><br/>
+        Favorittspråk:<br/>
+      <div id = "test">
+    
+        <label><input type="radio" value="HTML"> HTML</label>
+        <label><input type="radio" value="CSS"> CSS</label>
+        <label><input type="radio" value="JavaScript"> JavaScript</label>
+      </div>
+    
+    </div>  
+</body>
+</html>

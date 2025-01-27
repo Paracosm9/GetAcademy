@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.115С</title>
+<style>
+   
+</style>
+    
+</head>
+<body> 
+  
+<div style = "display: flex;" id="numberAndButtons">
+   
+</div>
+
+  <script>
+    showNumber1();
+    function showNumber1(){
+        document.getElementById('numberAndButtons').innerHTML = /*HTML*/`
+        <button onclick="showNumber4()">
+        Venstre
+        </button>
+        <div style="width: 40px;text-align: center;">
+        1
+        </div>
+        <button onclick="showNumber2()">
+        Høyre
+        </button>
+        
+        `;  
+    }
+    function showNumber2(){
+        document.getElementById('numberAndButtons').innerHTML = /*HTML*/`
+        <button onclick="showNumber1()">
+        Venstre
+        </button>
+        <div style="width: 40px;text-align: center;">
+        2
+        </div>
+        <button onclick="showNumber3()">
+        Høyre
+        </button>
+        
+        `;  
+    }
+    function showNumber3(){
+        document.getElementById('numberAndButtons').innerHTML = /*HTML*/`
+        <button onclick="showNumber2()">
+        Venstre
+        </button>
+        <div style="width: 40px;text-align: center;">
+       3
+        </div>
+        <button onclick="showNumber4()">
+        Høyre
+        </button>
+        
+        `;  
+    }
+    function showNumber4(){
+        document.getElementById('numberAndButtons').innerHTML = /*HTML*/`
+        <button onclick="showNumber3()">
+        Venstre
+        </button>
+        <div style="width: 40px;text-align: center;">
+       4
+        </div>
+        <button onclick="showNumber1()">
+        Høyre
+        </button>
+        
+        `;  
+    }
+
+    function show1(){
+        blankAll();
+        document.getElementById('myTag').innerHTML = /*HTML*/`
+        <h3>Her er noe i tagg 1</h3>
+        
+        `;  
+    }
+    function show2(){
+        blankAll();
+        document.getElementById('myTag2').innerHTML = /*HTML*/`
+        <h3>Her er noe i tagg 2</h3>
+        
+        `;  
+    }
+    function blankAll(){
+        document.getElementById('myTag').innerHTML = "";
+        document.getElementById('myTag2').innerHTML = "";
+    }
+  </script>
+
+</body>
+</html>

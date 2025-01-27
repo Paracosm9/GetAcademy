@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Ex.116D</title>
+    <style>
+        div.trafficLight {
+            width: 3rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        div.light {
+            background-color: red;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="dinId"> </div>
+    <script>
+    onStart();
+    function onStart() {
+          document.getElementById('dinId').innerHTML = /*HTML*/`
+          <div class="trafficLight" id = "dinId" onclick="secondPosition()"> 
+          <div class="light" style="background-color: red;"></div>
+        <div class="light" style="background-color: gray;"></div>
+        <div class="light" style="background-color: gray;"></div>
+    </div> 
+    `;
+    }
+    function secondPosition() {
+          document.getElementById('dinId').innerHTML = /*HTML*/`
+          <div class="trafficLight" id = "dinId" onclick="thirdPosition()"> 
+          <div class="light" style="background-color: red;"></div>
+        <div class="light" style="background-color: yellow;"></div>
+        <div class="light" style="background-color: gray;"></div>
+    </div> 
+    `;
+    }
+    function thirdPosition() {
+          document.getElementById('dinId').innerHTML = /*HTML*/`
+          <div class="trafficLight" id = "dinId" onclick="fourthPosition()"> 
+          <div class="light" style="background-color: gray;"></div>
+        <div class="light" style="background-color: gray;"></div>
+        <div class="light" style="background-color: green;"></div>
+    </div> 
+    `;
+    }
+    function fourthPosition() {
+          document.getElementById('dinId').innerHTML = /*HTML*/`
+          <div class="trafficLight" id = "dinId" onclick="onStart()"> 
+          <div class="light" style="background-color: gray;"></div>
+        <div class="light" style="background-color: yellow;"></div>
+        <div class="light" style="background-color: gray;"></div>
+    </div> 
+    `;
+    }
+    
+    </script>
+</body>
+</html>

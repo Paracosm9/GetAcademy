@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.116C</title>
+<style>
+   .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightblue;
+    padding: 50px;
+    border: 1px solid black;
+    }
+    .inside{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightblue;
+    padding: 50px;
+    border: 1px solid black;
+    }
+</style>
+    
+</head>
+<body>
+
+<div id="dinId"> </div>
+
+</body>
+<script>
+    onTheStreet();
+    function onTheStreet() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        <div class = "main">
+            <div class = "inside">
+                Du er utenfor en leilighet.
+        </div>
+            <div class = "inside"><button onclick="toTheEntrance()">Gå inn</button></div>
+             
+    </div>
+        
+        
+    
+    `;
+}
+function toTheEntrance() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+    <div class = "main">
+            <div class = "inside">
+                Du er i gangen.
+        </div>
+            <div class = "inside">
+                <button onclick="onTheStreet()">Gå ut</button>
+                <button onclick="toTheHall()">Gå inn i stua</button>
+                <button onclick="toTheBathroom()">Gå inn på badet </button>
+                <button onclick="toTheKitchen()">Gå inn på kjøkennet </button>
+                </div>        
+    </div>
+    `;
+}
+
+function toTheHall() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+    <div class = "main">
+            <div class = "inside">
+                Du er i stua!
+        </div>
+            <div class = "inside">
+                <button onclick="toTheEntrance()">Gå i gangen</button>
+                <button onclick="toTheKitchen()">Gå inn på kjøkennet </button>
+                </div>        
+    </div>
+    `;
+}
+
+function toTheBathroom() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+    <div class = "main">
+            <div class = "inside">
+                Du er på badet
+        </div>
+            <div class = "inside">
+                <button onclick="toTheEntrance()">Gå i gangen</button>
+    
+                </div>        
+    </div>
+    `;
+}
+
+function toTheKitchen() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+    <div class = "main">
+            <div class = "inside">
+                Du er på kjøkennet.
+        </div>
+            <div class = "inside">
+                <button onclick="toTheHall()">Gå inn i stua</button>
+                <button onclick="toTheEntrance()">Gå i gangen</button>
+                </div>        
+    </div>
+    `;
+}
+  </script>
+</html>

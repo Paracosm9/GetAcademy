@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.116A</title>
+<style>
+   
+</style>
+    
+</head>
+<body>
+
+<div style = "display: flex;"  id="dinId"> </div>
+
+</body>
+<script>
+    show1();
+    function show1() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show2()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>1</h1>
+        </div>
+        <button onclick="show2()">Doble et tall</button>
+    `;
+}
+function show2() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show3()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>2</h1>
+        </div>
+        <button onclick="show4()">Doble et tall</button>
+    `;
+}
+
+function show3() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show4()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>3</h1>
+        </div>
+        <button onclick="show6()">Doble et tall</button>
+    `;
+}
+
+function show4() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show5()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>4</h1>
+        </div>
+        <button onclick="show8()">Doble et tall</button>
+    `;
+}
+
+function show5() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show6()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>5</h1>
+        </div>
+        <button onclick="show10()">Doble et tall</button>
+    `;
+}
+
+function show6() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show7()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>6</h1>
+        </div>
+        <button onclick="show12()">Doble et tall</button>
+    `;
+}
+
+function show7() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show8()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>7</h1>
+        </div>
+        <button onclick="showMoreThanTwelve()">Doble et tall</button>
+    `;
+}
+
+function show8() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show9()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>8</h1>
+        </div>
+        <button onclick="showMoreThanTwelve()">Doble et tall</button>
+    `;
+}
+
+function show9() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show10()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>9</h1>
+        </div>
+        <button onclick="showMoreThanTwelve()">Doble et tall</button>
+    `;
+}
+
+function show10() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show11()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>10</h1>
+        </div>
+        <button onclick="showMoreThanTwelve()">Doble et tall</button>
+    `;
+}
+
+function show11() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show12()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>11</h1>
+        </div>
+        <button onclick="showMoreThanTwelve()">Doble et tall</button>
+    `;
+}
+
+function show12() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="showMoreThanTwelve()">Øke med én</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>12</h1>
+        </div>
+        <button onclick="showMoreThanTwelve()">Doble et tall</button>
+    `;
+}
+
+function showMoreThanTwelve() {
+    document.getElementById('dinId').innerHTML = /*HTML*/`
+        
+        <button onclick="show1()">Start på nytt</button>
+        <div style="width: 40px;text-align: center;">
+            <h1>Oops, more than 12. Start again!</h1>
+        </div>
+        
+    `;
+}
+  </script>
+</html>
