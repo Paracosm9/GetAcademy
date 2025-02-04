@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ex. 121A</title>
+</head>
+
+<body>
+  <!-- <button onclick="addCircle(30)">Legg til sirkel</button> 1-->
+
+  <button onclick="addCircle(70)">Legg til sirkel</button>
+  <br />
+  <svg id="mySvg" width="800" height="600" style="background-color: lightgray;">
+  </svg>
+  <div>
+    <input id="readX" type="number" placeholder="Enter X for circle" />
+    <input id="readY" type="number" placeholder="Enter Y for circle" />
+
+    <!-- <input id = "getColor" type="text" placeholder="Enter background color"/> -->
+    <div style="display: grid; grid-template-columns: repeat(2); grid-template-rows: repeat(2); gap: 20px">
+      <div id="first">
+        <label for="getColor">Choose background color: </label>
+        <select name="color" id="getColor">
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+          <option value="gray">Gray</option>
+        </select>
+    
+      <div>
+        <label for="getCircleColor">Choose color of circle: </label>
+        <select name="color" id="getCircleColor">
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+          <option value="gray">Gray</option>
+        </select>
+      </div>
+      <button
+        onclick="addCircleFromInput(document.getElementById('readX').value, document.getElementById('readY').value,document.getElementById('getColor').value, document.getElementById('getCircleColor').value )">Add
+        circle</button>
+    </div>
+    <div id="second">
+      <div>
+      <input id="readXr" type="number" placeholder="Enter X for rectangle" />
+      <input id="readYr" type="number" placeholder="Enter Y for rectangle" />
+      <input id="rectWidth" type="number" placeholder="Enter width for rectangle" />
+      <input id="rectHeight" type="number" placeholder="Enter height for rectangle" />
+
+    
+    </div>
+    <div>
+      <label for="getRectangleColor">Choose color of rectangle: </label>
+      <select name="color" id="getRectangleColor">
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="gray">Gray</option>
+      </select>
+    </div>
+    <button
+      onclick="addRectangleFromInput(
+        document.getElementById('rectWidth').value, 
+        document.getElementById('rectHeight').value,
+        document.getElementById('readXr').value, 
+        document.getElementById('readYr').value,
+        document.getElementById('getRectangleColor').value)">
+        Add rectangle</button>
+  </div>
+  </div>
+
+  <script>
+
+    function addCircleFromInput(x, y, backgroundColor, circleColor) {
+      addCircle(parseInt(x), parseInt(y), circleColor);
+      changeBackgroundColor(backgroundColor);
+    }
+    function addCircle(x, y, color) {
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+          <circle cx=${x} cy=${y} r="40" stroke=${color} stroke-width="4" fill="yellow" />            
+      `;
+    }
+    function changeBackgroundColor(color) {
+      document.getElementById('mySvg').style.backgroundColor = color;
+    }
+
+    function addRectangleFromInput(width, height , x, y, color) {
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+          <rect width = ${parseInt(width)} height =${parseInt(height)} x=${parseInt(x)} y=${parseInt(y)} rx="0" ry="0" fill=${color}/>            
+      `;
+    }
+  </script>
+</body>
+
+</html>

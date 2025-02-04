@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ex. 121B</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="start"></div>
+
+  <script>
+
+    /*
+    <label for="fname">First name:</label><br/>
+<input type="text" id="fname"><br/>
+<label for="lname">Last name:</label><br/>
+<input type="text" id="lname"><br/>
+<label for="zero2hundred">En til hundre:</label><br/>
+<input type="range" min="1" max="100" step="1" id="zero2hundred"><br/>
+<label for="number">Skriv inn et tall:</label><br/>
+<input type="number" id="number"><br/>
+<input type="radio" id="html" name="fav_language">
+<label for="html">HTML</label><br/>
+<input type="radio" id="css" name="fav_language">
+<label for="css">CSS</label><br>
+<input type="radio" id="javascript" name="fav_language">
+<label for="javascript">JavaScript</label><br/>
+<input type="checkbox" id="vehicle1">
+<label for="vehicle1"> I have a bike</label><br/>
+<input type="checkbox" id="vehicle2">
+<label for="vehicle2"> I have a car</label><br/>
+<input type="checkbox" id="vehicle3">
+<label for="vehicle3"> I have a boat</label><br/>
+    */
+    onOpen();
+    function onOpen() {
+      drawLabel('fname', 'First name');
+      drawInputText('text', 'fname');
+      drawLabel("lname", "Last name");
+      drawInputText('text', 'lname');
+      drawLabel("zero2hundred", "En til hundre:");
+      drawRange("range", 1, 100, 1, "zero2hundred");
+      drawLabel('number', 'Skriv inn et tall:');
+      drawInputText('number', 'number');
+      drawRatio("radio", "html", "fav_language");
+      drawLabel("html", "HTML");
+      drawRatio("radio", "css", "fav_language");
+      drawLabel("css", "CSS");
+      drawRatio("radio", "javascript", "fav_language");
+      drawLabel("javascript", "JavaScript");
+      drawInputText("checkbox", "vehicle1");
+      drawLabel("vehicle1", "I have a bike");
+      drawInputText("checkbox", "vehicle2");
+      drawLabel("vehicle2", "I have a car");
+      drawInputText("checkbox", "vehicle3");
+      drawLabel("vehicle3", "I have a boat");
+    }
+    function drawLabel(labelFor, labelText) {
+      document.getElementById('start').innerHTML += /*HTML*/`
+            <label for="${labelFor}">${labelText}</label><br/>
+        `;
+    };
+    function drawInputText(inputType, inputId) {
+      if (inputType == "checkbox") {
+        document.getElementById('start').innerHTML += /*HTML*/`
+        <input type=${inputType} id=${inputId}>
+        `;
+      } else {
+        document.getElementById('start').innerHTML += /*HTML*/`
+        <input type=${inputType} id=${inputId}><br/>
+        `;
+      }
+    }
+    function drawRatio(type, id, name) {
+      document.getElementById('start').innerHTML += /*HTML*/`
+      <input type=${type} id=${id} name=${name}>
+        `;
+    }
+    function drawRange(range, min, max, step, id) {
+      document.getElementById('start').innerHTML += /*HTML*/`
+      <input type=${range} min=${min} max=${max} step=${step} id=${id}><br/>
+        `;
+    }
+
+  </script>
+</body>
+
+</html>

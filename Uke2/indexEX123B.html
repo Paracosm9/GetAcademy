@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.123C</title>
+</head>
+<style>
+    #app {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+
+<body>
+    <div id="app">
+
+    </div>
+    <div>
+
+        <input type="range" min="1" max="100" step="1" id="rng"> <br>
+        <label for="rng">What the color will be?</label>
+    </div>
+    <script>
+        document.getElementById("rng").addEventListener("input", () => {
+            changeBkg(document.getElementById("rng").value);
+        });
+        function changeBkg(value) {
+            value = parseInt(value);
+            if (value <= 30) {
+                document.getElementById('app').style.backgroundColor = "red";
+            }
+            else if (value >= 70) {
+                document.getElementById('app').style.backgroundColor = "green";
+            }
+            else {
+                document.getElementById('app').style.backgroundColor = "yellow";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

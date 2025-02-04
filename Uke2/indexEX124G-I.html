@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.124G</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <div id="dateAsText"></div>
+    <script>
+        showDateSelector();
+        dateAsText();
+        function createNumberSelector(start, minAmount, maxAmount, nameOf) {
+            return /*HTML*/`
+            <div id="${nameOf}Main" style="display: flex;align-items: center;">
+            <div id="${nameOf}" style="font-size: 300%;">${start}</div>
+            <div style="display: flex; flex-direction: column;align-items: flex-start;">
+            <button id = "up${nameOf}" onclick="select${nameOf}(${start + 1}); 
+            checkMinMax(${start + 1}, ${minAmount}, ${maxAmount}, '${nameOf}'); dateAsText()">▲</button>
+            <button id = "down${nameOf}" onclick="select${nameOf}(${start - 1}); 
+            checkMinMax(${start - 1}, ${minAmount}, ${maxAmount},'${nameOf}'); dateAsText()">▼</button>
+                </div>
+            </div>
+          `;
+        }
+        function showDateSelector() {
+            document.getElementById('app').innerHTML =
+                createNumberSelector(13, 1, 31, 'Day')
+                + createNumberSelector(8, 1, 12, 'Month')
+                + createNumberSelector(2023, 2020, 2025, 'Year');
+        }
+
+
+        function selectDay(day) {
+
+            let month = parseInt(document.getElementById("MonthMain").innerText[0] + document.getElementById("MonthMain").innerText[1]);
+            let year = parseInt(document.getElementById("YearMain").innerText[0]
+                + document.getElementById("YearMain").innerText[1]
+                + document.getElementById("YearMain").innerText[2]
+                + document.getElementById("YearMain").innerText[3]); //I know that here I could do same as in date in text function, but let it be as monument of my stupidity :D
+
+            if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+                document.getElementById('DayMain').outerHTML =
+                    createNumberSelector(day, 1, 31, 'Day');
+            }
+            else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                document.getElementById('DayMain').outerHTML =
+                    createNumberSelector(day, 1, 30, 'Day');
+            }
+            else {
+                if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                    document.getElementById('DayMain').outerHTML =
+                        createNumberSelector(day, 1, 29, 'Day');
+                }
+                else {
+                    document.getElementById('DayMain').outerHTML =
+                        createNumberSelector(day, 1, 28, 'Day');
+                }
+            }
+
+        }
+
+        function selectMonth(month) {
+            document.getElementById('MonthMain').outerHTML =
+                createNumberSelector(month, 1, 12, 'Month');
+        }
+
+        function selectYear(year) {
+            document.getElementById('YearMain').outerHTML =
+                createNumberSelector(year, 2000, 2023, 'Year');
+        }
+        function checkMinMax(start, minAmount, maxAmount, nameOf) {
+            if (start >= maxAmount) {
+                document.getElementById("up" + nameOf).disabled = true;
+            }
+            if (start <= minAmount) {
+                document.getElementById("down" + nameOf).disabled = true;
+            }
+        }
+
+        function dateAsText() {
+            day = document.getElementById("Day").innerText;
+            month = document.getElementById("Month").innerText;
+            year = document.getElementById("Year").innerText;
+
+            document.getElementById("dateAsText").innerHTML = /*HTML*/`
+                ${day}.${month}.${year}
+           `;
+        }
+
+    </script>
+</body>
+
+</html>

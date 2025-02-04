@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.124B</title>
+</head>
+<body>
+    <div id = "app">
+        <input type="number" id = "cels">
+    </div>
+    <div>
+        <div id = "answer"></div>
+        <div><button onclick="calculate(document.getElementById('cels').value)">Konvertere til Fahrenheit</button></div>
+    </div>
+    <script>
+        function calculate(celsTemp){
+            document.getElementById("answer").innerHTML = /*HTML*/`
+            The ${celsTemp} temperature in Celsium is ${celsTemp * (9/5) + 32} in Fahrenheit
+             `; 
+        }
+    </script>
+</body>
+</html>

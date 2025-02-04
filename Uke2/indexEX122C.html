@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.122C</title>
+</head>
+<style>
+    #textDiv {
+        font-size: large;
+    }
+    div > button {
+        border-radius: 10%;
+        background-color: aquamarine;
+        cursor: pointer;
+        width: 100px;
+        height: 50px;
+        border-bottom: 4px solid #547b80;
+        border-radius: 0.4em; 
+        margin-top: 100px;
+    
+    }
+</style>
+<body>
+    <div id = "textDiv"><h1>Kort tekst i en div</h1></div>
+    <div>
+        <button onclick="changeTextSize(++textSize)">Make bigger</button>
+        <button onclick="changeTextSize(--textSize)">Make smaller</button>
+    </div>
+    <script>
+        let textSize = 12; //why not 10? Who knows...
+        function changeTextSize (textSize){
+            document.getElementById('textDiv').style.fontSize = `${textSize}pt`;
+        }
+    </script>
+</body>
+</html>

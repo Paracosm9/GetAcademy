@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title>Ex.123C</title>
+    <style>
+        div.trafficLight {
+            width: 3rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        div.light {
+            background-color: red;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dinId"> </div>
+    <div>
+        <button onclick="goToNextPhase()">Neste</button>
+    </div>
+    <script>
+        var phase = 0;
+        drawTrafficLight(true, false, false);
+        function drawTrafficLight(red, yellow, green) {
+            let color1 = red ? "red": "gray"; 
+            let color2 = yellow ? "yellow": "gray"; 
+            let color3 = green ? "green": "gray"; 
+            document.getElementById('dinId').innerHTML = /*HTML*/`
+            <div class="trafficLight" id = "dinId">
+            <div class="light" style="background-color: ${color1};"></div>
+            <div class="light" style="background-color: ${color2};"></div>
+            <div class="light" style="background-color: ${color3};"></div>
+         </div> 
+         `;
+
+    }
+    function goToNextPhase (){
+        console.log(phase);
+        if (phase == 0){
+            phase++;
+            drawTrafficLight(true, false, false);           
+        }
+        else if (phase == 1){
+            phase++; 
+            drawTrafficLight (true, true, false); 
+        }
+        else if (phase == 2) {
+            phase++; 
+            drawTrafficLight (false, false, true);
+        }
+        else if (phase == 3) {
+            phase = 0; 
+            drawTrafficLight (false, true, false);
+        }
+    }
+
+
+
+
+
+
+    </script>
+</body>

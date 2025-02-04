@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.124F</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <div id="app2">
+
+    </div>
+    <script>
+        document.getElementById("app").innerHTML = createDiv("Quick red fox jumps...", "lightgreen", "blue");
+        document.getElementById("app2").innerHTML = createGrid(3, 2,
+            createDiv('Kol 1 rad 1')
+            + createDiv('Kol 2 rad 1')
+            + createDiv('Kol 3 rad 1')
+            + createDiv('Kol 1 rad 2')
+            + createDiv('Kol 2 rad 2')
+            + createDiv('Kol 3 rad 2')
+        );
+
+
+        function createDiv(text, foregroundColor, backgroundColor) {
+            if (!foregroundColor && !backgroundColor) { //if we haven't styles...
+                return /*HTML*/`<div>${text}</div>`
+            }
+            return /*HTML*/`<div style = "background-color : ${foregroundColor}; color: ${backgroundColor}">${text}</div>`
+        }
+
+        function createGrid(columnCount, rowCount, innHTML) {
+            return /*HTML*/`
+            <div style="display: grid; grid-template-columns: repeat(${columnCount}, auto);grid-template-rows: repeat(${rowCount}, auto)">
+                ${innHTML}
+              </div>  
+            `
+        }
+
+    </script>
+</body>
+
+</html>

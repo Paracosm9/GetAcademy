@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.122A</title>
+    <style>
+        #board {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(8, 50px);
+        }
+
+        #board>div {
+            border: 1px solid lightblue;
+        }
+
+        .selected {
+            background-color: yellow;
+        }
+
+        #buttons {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(3, 50px);
+            grid-template-rows: repeat(3, 50px);
+            margin: 0 auto;
+        }
+
+        button {
+            padding: 10px;
+            border: 1px solid gray;
+            background-color: gray;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+
+        }
+
+        #myIndex {
+            display: grid;
+            justify-content: center;
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board">
+    </div>
+    <div id="buttons">
+        <div></div>
+        <button onclick="moveUp()">▲</button>
+        <div></div>
+        <button onclick="moveLeft()">◄</button>
+        <div></div>
+        <button onclick="moveRight()">►</button>
+        <div></div>
+        <button onclick="moveDown()">▼</button>
+    </div>
+    <div id="myIndex" style="font-size: 22;"></div>
+    <script>
+        let selectedSquareIndex = 12;
+        const size = 64;
+        showBoard();
+        function showBoard() {
+            document.getElementById('board').innerHTML = ''; //This is genius move for me. 
+            drawEmptyCells('<div></div>', selectedSquareIndex);
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+            document.getElementById('board').innerHTML += part2;
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            drawEmptyCells('<div></div>', size - (selectedSquareIndex + 1));
+        }
+
+        function drawEmptyCells(pattern, length) {
+            const part = ''.padEnd(pattern.length * length, pattern);
+            document.getElementById('board').innerHTML += part;
+            document.getElementById('myIndex').innerHTML = 
+            /*HTML*/`<h1>Id of square: ${selectedSquareIndex}</h1>`;
+
+
+        }
+
+        function moveUp() {
+            if (selectedSquareIndex >= 8) { //EIght is first row, so +8 is the second...
+                selectedSquareIndex -= 8;
+                showBoard();
+            }
+            else {
+                selectedSquareIndex += 56;
+                showBoard();
+            }
+        }
+        function moveDown() {
+            if (selectedSquareIndex <= size - 9) { //size - 9 is the last row, so -8 is the second last row
+                selectedSquareIndex += 8;
+                showBoard();
+            }
+            else {
+                selectedSquareIndex -= 56; // 63 - 56 = 7, so the first row)
+                showBoard();
+            }
+        }
+        function moveRight() {
+            if ((selectedSquareIndex + 1) % 8 !== 0) { //7, 15, 23 etc - number of first rows, so if +1, then - 7 to get to first column. 
+                selectedSquareIndex++;
+                showBoard();
+            }
+            else {
+                selectedSquareIndex -= 7;
+                showBoard();
+            }
+        }
+        function moveLeft() {
+            if (selectedSquareIndex % 8 !== 0) { //first column is 0, 8, 16 etc. So if 0, then +7 to get to last column
+                selectedSquareIndex--;
+                showBoard();
+            }
+            else {
+                selectedSquareIndex += 7;
+                showBoard();
+            }
+        }
+
+    </script>
+</body>
+
+</html>

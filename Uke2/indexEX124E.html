@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.124E</title>
+</head>
+<body>
+    <div id = "app">
+
+    </div>
+    <script>
+        document.getElementById("app").innerHTML = createDiv("Quick red fox jumps...", "lightgreen", "blue");
+        function createDiv(text, foregroundColor, backgroundColor) {
+            if (!text || !foregroundColor || !backgroundColor) {
+                return `ERROR: some value is missed`; 
+            }
+            return /*HTML*/`<div style = "background-color : ${foregroundColor}; color: ${backgroundColor}">${text}</div>`
+        }
+
+    </script>
+</body>
+</html>

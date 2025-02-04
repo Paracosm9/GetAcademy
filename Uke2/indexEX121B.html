@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ex. 121B</title>
+  <style>
+    table{
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}
+div{
+  display: grid;
+  border: 1px solid black;
+  padding: 25px;
+  width: 50%;
+  margin: 15px;
+  grid-gap: 10px;
+}
+input{
+  padding: 10px;
+  border: 1px solid gray;
+}
+button{
+  padding: 10px;
+  border: 1px solid gray;
+  background-color: #04AA6D;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+  </style>
+</head>
+
+<body>
+ <div>
+  <table id = "myTable">
+    <tr>
+      <th>Dag</th>
+      <th>Time</th>
+      <th>Minutt</th>
+      <th>Temperatur</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>10</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>10</td>
+      <td>15</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>10</td>
+      <td>30</td>
+      <td>7</td>
+    </tr>
+  </table>
+ </div>
+<div>
+  <input type="number" id = "Dag" placeholder = "Dag">
+  <input type="number" id = "Time" placeholder = "Time">
+  <input type="number" id = "Minutt" placeholder = "Minutt">
+  <input type="number" id = "Temperatur" placeholder = "Temperatur">
+  <button onclick="addContent(
+    document.getElementById('Dag').value,
+    document.getElementById('Time').value,
+    document.getElementById('Minutt').value,
+    document.getElementById('Temperatur').value,
+    )">Add row!</button>
+</div>
+<script>
+    function addContent(day, time, minute, temperature){
+        let newRow = /*HTML*/`
+        <tr>
+            <td>${day}</td>
+            <td>${time}</td>
+            <td>${minute}</td>
+            <td>${temperature}</td>
+        </tr>
+        `;
+        document.getElementById('myTable').innerHTML += newRow;        
+    }
+</script>
+</body>
+
+</html>

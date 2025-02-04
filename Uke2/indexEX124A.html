@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.124A</title>
+</head>
+<body>
+    <div id = "myId">
+        <div>
+            <input type="text" id = "varer"><br>
+        <label for="varer">Hva kjøpte?</label>
+        </div>
+        <div>
+            <input type="number" id = "pris"><br>
+        <label for="varer">Hva er pris?</label>
+        </div>
+        <input type="number" id = "antall"><br>
+        <label for="varer">Hvor mange?</label>
+
+    </div>
+    <div id = "linije">
+        <button onclick="showAnswer()">
+                Kalkulere
+        </button>
+        <div id = "answer">
+
+        </div>
+    </div>
+    <script>
+        function showAnswer() {
+           
+            document.getElementById ("answer").innerHTML = 
+            calculate (document.getElementById("varer").value, document.getElementById("pris").value, document.getElementById("antall").value); 
+        }
+        function calculate(name, price, amount){
+            return `${amount} stk. ${name} a ${price}kr = ${price * amount}kr`
+        }
+    </script>
+</body>
+</html>

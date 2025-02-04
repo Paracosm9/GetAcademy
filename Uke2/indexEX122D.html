@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.122C</title>
+</head>
+<style>
+    #textDiv {
+        font-size: large;
+    }
+
+    .bigSmall {
+        border-radius: 10%;
+        background-color: aquamarine;
+        font-size: large;
+        cursor: pointer;
+        width: 300px;
+        height: 200px;
+        border-bottom: 4px solid #547b80;
+        border-radius: 0.4em;
+        margin-top: 100px;
+
+    }
+
+    select {
+        width: 300px;
+        height: 200px;
+        font-size: x-large;
+    }
+
+    .colors {
+        width: 300px;
+        height: 80px;
+        font-size: x-large;
+    }
+</style>
+
+<body>
+    <div id="textDiv">
+        <h1>Kort tekst i en div</h1>
+    </div>
+    <div>
+        <button class="bigSmall" onclick="changeTextSize(++textSize)">Make bigger</button>
+        <button class="bigSmall" onclick="changeTextSize(--textSize)">Make smaller</button>
+    </div>
+    <div>
+        <select onchange="selectFontFamily(this.value)">
+            <option>Arial</option>
+            <option>Verdana</option>
+            <option>Tahoma</option>
+            <option>Trebuchet MS</option>
+            <option>Times New Roman</option>
+            <option>Georgia</option>
+            <option>Garamond</option>
+            <option>Courier New</option>
+            <option>Brush Script MT</option>
+        </select>
+    </div>
+    <div>
+        <button class="colors" onclick="changeColor(valueRed+=5, valueGreen, valueBlue)">Increase red</button>
+        <button class="colors" onclick="changeColor(valueRed-=5, valueGreen, valueBlue)">Decrease red</button>
+        <button class="colors" onclick="changeColor(valueRed, valueGreen+=5, valueBlue)">Increase green</button>
+        <button class="colors" onclick="changeColor(valueRed, valueGreen-=5, valueBlue)">Decrease green</button>
+        <button class="colors" onclick="changeColor(valueRed, valueGreen, valueBlue+=5)">Increase blue</button>
+        <button class="colors" onclick="changeColor(valueRed, valueGreen, valueBlue-=5)">Decrease blue</button>
+
+    </div>
+    <script>
+
+        selectFontFamily("Courier New");
+        let textSize = 15; //why not 10? Who knows..
+
+        let valueRed = 125;
+        let valueGreen = 125;
+        let valueBlue = 125;
+
+        document.getElementById('textDiv').style.backgroundColor = `rgb(${valueRed},${valueGreen},${valueBlue})`;
+
+        function changeTextSize(textSize) {
+            document.getElementById('textDiv').style.fontSize = `${textSize}pt`;
+        }
+        function selectFontFamily(fontFamily) {
+            document.getElementById('textDiv').style.fontFamily = `${fontFamily}`;
+        }
+
+        function changeColor(red, green, blue) {
+            document.getElementById('textDiv').style.backgroundColor = `rgb(${red},${green},${blue})`;
+            console.log(window.getComputedStyle(document.getElementById("textDiv")).backgroundColor);
+        }
+    </script>
+</body>
+
+</html>

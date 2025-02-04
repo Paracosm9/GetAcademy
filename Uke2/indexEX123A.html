@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.123A</title>
+</head>
+<body>
+    <div id="app"></div>
+
+<script>
+drawForm();
+
+function drawForm() {
+    // drawTextField('fname', 'First Name');
+    // drawTextField('lname', 'Last Name');
+    // drawRangeField('zero2hundred', 'En til hundre');
+    drawField('fname', 'First Name', 'text');
+    drawField('lname', 'Last Name', 'text');
+    drawField('zero2hundred', 'En til hundre', 'range');
+    drawField('lname', 'Skriv inn et tall', 'number');
+    drawField('html', 'HTML', 'radio', 'fav_language');
+    drawField('css', 'CSS', 'radio', 'fav_language');
+    drawField('js', 'JavaScript', 'radio', 'fav_language');
+    drawField ('vehicle1', 'I have a bike', 'checkbox', 'vehicle1','Bike' );
+    drawField ('vehicle2', 'I have a car', 'checkbox', 'vehicle2','Car' );
+    drawField ('vehicle3', 'I have a boat', 'checkbox', 'vehicle3','Boat' );
+}        
+
+function drawField(id, label, type, radioGroupName, valueOf) {
+    let minMaxStep = '';
+    let breakTag = '<br/>';
+    let labelTag = `<label for="${id}">${label}:</label>`;
+    let fieldTag = ` <input type="${type}" ${minMaxStep} id="${id}">`;
+    if (type == 'range') {
+        minMaxStep = 'min="1" max="100" step="1"';
+    }
+    let html = label + breakTag + fieldTag + breakTag;
+    if(type == 'radio'){
+        html = /*html*/` 
+            <input type="${type}" name="${radioGroupName}" id="${id}" value = ${valueOf}>
+            <label for="${id}">${label}</label>
+            <br/>
+            `;
+    }
+    if (type == 'checkbox') {
+        html = /*html*/` 
+            <input type="${type}" name="${radioGroupName}" id="${id}">
+            <label for="${id}">${label}</label>
+            <br/>
+            `;
+        
+    }
+    document.getElementById('app').innerHTML += html;
+}
+
+
+</script>
+</body>
+</html>

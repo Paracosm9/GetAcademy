@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.124C</title>
+</head>
+<body>
+    <div id = "app">
+        <input type="number" id = "temp">
+        <div>
+            <input type="radio" name = "tempRad" value = "0">
+            <label for="celsium">Celsium</label><br>
+            <input type="radio" name = "tempRad" value = "1">
+            <label for="farenh">Fahrenheit</label>    
+        </div>
+    </div>
+    <div>
+        <div id = "answer"></div>
+        <div><button onclick="calculate(document.getElementById('temp').value, 
+        getRadioVal())">Konvertere</button></div>
+    </div>
+    <script>
+        function calculate(temp, isTempOrIsCelsium){
+        
+            // 0 =  (from celsium to fahrenheit) , 1 =  (from fahrenheit to celsium) ))
+            if (isTempOrIsCelsium == '1') {
+                document.getElementById("answer").innerHTML = /*HTML*/`
+            The ${temp} temperature in Fahrenheit is ${(temp - 32) *  5/9} in Celsium
+             `; 
+            }
+            else {
+                document.getElementById("answer").innerHTML = /*HTML*/`
+            The ${temp} temperature in Celsium is ${temp  * 9/5 + 32} in Fahrenheit
+             `; 
+            }
+        }
+    function getRadioVal(){
+        return document.querySelector('input[name="tempRad"]:checked').value
+    }
+    </script>
+</body>
+</html>
