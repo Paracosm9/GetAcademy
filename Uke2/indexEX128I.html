@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.128I</title>
+</head>
+
+<body>
+    <div id=app>
+        <input type="number" id="number1">
+        <input type="number" id="number2">
+        <input type="number" id="number3">
+        <button onclick="getTheBiggestNumber()">Get the biggest number</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function getTheBiggestNumber() {
+            let number1 = parseInt(document.getElementById("number1").value);
+            let number2 = parseInt(document.getElementById("number2").value);
+            let number3 = parseInt(document.getElementById("number3").value);
+            let max = 0; 
+            if (number1 >= number2 && number1 >= number3 ) { max = number1; }
+            else if (number2 >= number1 && number2 >= number3) { max = number2;  }
+            else if (number3 >= number1 && number3 >= number2) { max = number3;  }
+            document.getElementById('result').innerHTML = /*HTML*/`
+            The biggest number is ${max}! 
+            `;
+        }
+    </script>
+</body>
+
+</html>

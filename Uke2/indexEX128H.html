@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.128H</title>
+</head>
+<style>
+    #app {
+        width: 300px;
+        height: 450px;
+        display: grid;
+        border: 2px solid #333;
+        border-radius: 15px;
+        background: #222;
+        padding: 10px;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            "disp disp disp disp"
+            "disp disp disp disp"
+        ;
+        gap: 5px;
+    }
+
+    #app>div {
+        border: 1px solid red;
+    }
+
+    .display {
+        grid-area: disp;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: #000;
+        color: #0f0;
+        font-size: x-large;
+    }
+
+    .keyboard {
+        color: red;
+        justify-content: center;
+        font-size: x-large;
+    }
+</style>
+
+<body>
+
+    <div id='app'> </div>
+
+
+</body>
+<script>
+    drawKeyBoard();
+    function drawKeyBoard() {
+        document.getElementById('app').innerHTML = /*HTML*/`<div class = "display" id = "disp"></div>`;
+        document.getElementById('app').innerHTML +=
+            drawOneButton
+            ('7', '7', `addSymbolToScreen(7)`) +
+            drawOneButton
+            ("8", "8", `addSymbolToScreen(8)`) +
+            drawOneButton
+            ("9", "9", `addSymbolToScreen(9)`) +
+            drawOneButton
+            ("divide", "/", `addSymbolToScreen('/')`) +
+            drawOneButton
+            ("4", "4", `addSymbolToScreen(4)`) +
+            drawOneButton
+            ("5", "5", `addSymbolToScreen(5)`) +
+            drawOneButton
+            ("6", "6", `addSymbolToScreen(6)`) +
+            drawOneButton
+            ("multiply", "*", `addSymbolToScreen('*')`) +
+            drawOneButton
+            ("1", "1", `addSymbolToScreen(1)`) +
+            drawOneButton
+            ("2", "2", `addSymbolToScreen(2)`) +
+            drawOneButton
+            ("3", "3", `addSymbolToScreen(3)`) +
+            drawOneButton
+            ("minus", "-", `addSymbolToScreen('-')`) +
+            drawOneButton
+            ("0", "0", `addSymbolToScreen(0)`) +
+            drawOneButton
+            ("C", "C", `clearScreen()`) +
+            drawOneButton
+            ("equals", "=", `calculateAndShowResult()`) +
+            drawOneButton
+            ("plus", "+", `addSymbolToScreen('+')`);
+    }
+    function drawOneButton
+    (id, value, func) {
+        return  /*HTML*/`
+        <button class = "keyboard" id = "${id}" onclick = "${func}">${value}</button>
+        `
+    }
+    function addSymbolToScreen(num) {
+        document.getElementById("disp").innerHTML += `${num}`;
+    }
+    function clearScreen() {
+        document.getElementById("disp").innerHTML = ``;
+    }
+    function calculateAndShowResult() {
+        let textToParse = document.getElementById("disp").textContent;
+        console.log(textToParse);
+        let parts = textToParse.split(/([*+\-/])/);
+        let result = 0;
+        if (parts[1] == '*') {
+            result = parseInt(parts[0]) * parseInt(parts[2]);
+        }
+        else if (parts[1] == '/') {
+            result = parseInt(parts[0]) / parseInt(parts[2]);
+        }
+        else if (parts[1] == '+') {
+            result = parseInt(parts[0]) + parseInt(parts[2]);
+        }
+        else { result = parseInt(parts[0]) - parseInt(parts[2]); }
+        clearScreen(); 
+        document.getElementById("disp").textContent = `${result}`       
+    }
+
+</script>
+
+</html>

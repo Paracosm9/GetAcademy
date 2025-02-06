@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.128E</title>
+</head>
+<style>
+    #app {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(2, 100px);
+        grid-template-rows: repeat(2, 100px);
+        margin: 0 auto;
+    }
+
+    #app>div {
+        border: 1px solid black;
+    }
+
+    #selected {
+        background-color: yellow;
+        border: 2px solid red;
+    }
+</style>
+
+<body>
+    <div id="app"> </div>
+    <script>
+        createButtons(getRandomNumber());
+        function createButtons(randomNumber) {
+            let div = randomDiv(randomNumber);
+            document.getElementById("app").innerHTML = div;
+        }
+
+        function randomDiv(randomNumber) {
+            return /*HTML*/`
+            <div id="${randomNumber == 1 ? 'selected' : '1'}" onclick="${randomNumber == 1 ? 'createButtons(getRandomNumber())' : ''}"> </div>
+            <div id="${randomNumber == 2 ? 'selected' : '2'}" onclick="${randomNumber == 2 ? 'createButtons(getRandomNumber())' : ''}"> </div>
+            <div id="${randomNumber == 3 ? 'selected' : '3'}" onclick="${randomNumber == 3 ? 'createButtons(getRandomNumber())' : ''}"> </div>
+            <div id="${randomNumber == 4 ? 'selected' : '4'}" onclick="${randomNumber == 4 ? 'createButtons(getRandomNumber())' : ''}"> </div>
+          
+            `;
+        }
+        function getRandomNumber() {
+            return Math.ceil(Math.random() * 4);
+        }
+    </script>
+</body>
+
+</html>

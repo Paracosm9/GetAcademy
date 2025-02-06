@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex. 128D</title>
+</head>
+<style>
+    button {
+        width: 50px;
+        height: 50px;
+        margin: 20px;
+    }
+
+    #app {
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    #comp {
+        width: 250px;
+        height: 250px;
+    }
+
+    #res {
+        border: 3px red solid;
+        border-radius: 4%;
+        font-size: larger;
+    }
+</style>
+
+<body>
+
+    <div id="comp">
+
+    </div>
+    <div id="app">
+
+    </div>
+
+    <script>
+        let computerWins = 0;
+        let playerWins = 0;
+        let draws = 0;
+        onStart();
+        function onStart() {
+            let playerChoice = '';
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <button id="sci" onclick="elementWasChosen('saks')">✂️</button>
+            <button id="rock" onclick="elementWasChosen('stein')">🪨</button>
+            <button id="pap" onclick="elementWasChosen('papir')">📃</button>
+                `;
+
+        }
+        function getRandomNumber() {
+            let choice = Math.floor(Math.random() * 3);
+            console.log(choice);
+            if (choice == 1) {
+                return 'stein';
+            }
+            else if (choice == 2) {
+                return 'saks'
+            }
+            else return 'papir'; //0 )
+        }
+        function elementWasChosen(element) {;
+            let computer = getRandomNumber();
+            logicOfGame(computer, element);
+        }
+        function logicOfGame(computer, player) {
+            let result = '';
+            if (computer == player) {
+                result = 'Kamptreking!'
+                draws++;
+            }
+            else if (computer == 'stein' && player == 'saks') {
+                result = 'Computeren vant!';
+                computerWins++;
+            }
+            else if (computer == 'saks' && player == 'papir') {
+                result = 'Computeren vant!';
+                computerWins++;
+            }
+            else if (computer == 'papir' && player == 'stein') {
+                result = 'Computeren vant!';
+                computerWins++;
+            }
+            else if (computer == 'stein' && player == 'papir') {
+                result = 'Spilleren vant!';
+                playerWins++;
+            }
+            else if (computer == 'saks' && player == 'stein') {
+                result = 'Spilleren vant!';
+                playerWins++;
+            }
+            else if (computer == 'papir' && player == 'saks') {
+                result = 'Spilleren vant!';
+                playerWins++;
+            }
+            drawResult(computer, player, result, computerWins, playerWins, draws);
+        }
+
+        
+        function drawResult(computer, player, result, computerWins, playerWins, draws) {
+                document.getElementById("comp").innerHTML = /*HTML*/`
+                 <h3>Computeren valgte: ${computer}</h3>
+                 <h3>Spilleren valgte: ${player}</h3> <br>
+                ${result}<br>
+
+                <div id = "res">
+                    Datamaskinen vant spillene: ${computerWins}<br>
+                    Spilleren vant spillene: ${playerWins}<br>
+                    Kamptrekker: ${draws}
+                    </div>
+            `;
+            }
+
+    </script>
+</body>
+
+</html>

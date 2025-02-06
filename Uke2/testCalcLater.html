@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.128H</title>
+</head>
+<style>
+    #app {
+        width: 300px;
+        height: 450px;
+        display: grid;
+        border: 2px solid #333;
+        border-radius: 15px;
+        background: #222;
+        padding: 10px;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-areas: 
+        "disp disp disp disp"       
+        "disp disp disp disp"       
+        ;
+        gap: 5px;
+    }
+
+    #app>div {
+        border: 1px solid red;
+    }
+
+    .display {
+        grid-area: disp;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: #000;
+        color: #0f0;
+        font-size: x-large;
+    }
+
+    .keyboard {
+        color: red;
+        justify-content: center;
+        font-size: x-large;
+    }
+</style>
+
+<body>
+
+    <div id='app'> </div>
+     
+
+</body>
+<script>
+     drawKeyBoard(); 
+    function drawKeyBoard() { 
+        document.getElementById('app').innerHTML = /*HTML*/`<div class = "display" id = "disp"></div>`;        
+        document.getElementById('app').innerHTML += 
+        drawButton ('7', '7', `addSymbolToScreen(7)`) +  
+        drawButton ("8", "8", `addSymbolToScreen(8)`) + 
+        drawButton ("9", "9", `addSymbolToScreen(9)`) + 
+        drawButton ("divide", "/", `addSymbolToScreen('/')`) + 
+        drawButton ("4", "4", `addSymbolToScreen(4)`) + 
+        drawButton ("5", "5", `addSymbolToScreen(5)`) + 
+        drawButton ("6", "6", `addSymbolToScreen(6)`) + 
+        drawButton ("multiply", "*", `addSymbolToScreen('*')`) + 
+        drawButton ("1", "1", `addSymbolToScreen(1)`) + 
+        drawButton ("2", "2", `addSymbolToScreen(2)`) + 
+        drawButton ("3", "3", `addSymbolToScreen(3)`) + 
+        drawButton ("minus", "-", `addSymbolToScreen('-')`) + 
+        drawButton ("0", "0", `addSymbolToScreen(0)`) + 
+        drawButton ("C", "C", `clearScreen()`) + 
+        drawButton ("equals", "=", `calculateAndShowResult()`) + 
+        drawButton ("plus", "+", `addSymbolToScreen('+')`); 
+    }
+    function drawButton(id, value, func){ 
+      return  /*HTML*/`
+        <button class = "keyboard" id = "${id}" onclick = "${func}">${value}</button>
+        `
+    }
+    function addSymbolToScreen(num){
+        console.log(num);
+        document.getElementById("disp").innerHTML += `${num}`; 
+
+    }
+    function clearScreen(){
+        document.getElementById("disp").innerHTML = ``;
+    }
+    function calculateAndShowResult(){
+        let textToParse = document.getElementById("disp").textContent; 
+        console.log(textToParse);
+        let isTokens = true;
+        while (isTokens){
+            let multAndDivEx = (textToParse.indexOf('/') > -1 || textToParse.indexOf("*") > -1);
+            while (multAndDivEx) { //why is error here; 
+                let isDivFirst = ((textToParse.indexOf('/')) < textToParse.indexOf('*')); 
+                if (isDivFirst){
+                    let divider = '/'
+                    textToParse = sliceAtMultiOrDiv(textToParse, divider);
+                }
+                else {
+                    let divider = '*'
+                    textToParse = sliceAtMultiOrDiv(textToParse, divider);
+                }
+            }
+            
+        }
+        console.log(textToParse);
+    }
+
+    function sliceAtMultiOrDiv(stringToParse, divider){
+        let placeOfSymbol = stringToParse.indexOf(divider);
+        let placer = 0; 
+        let startInd = 0; 
+        let partBefore = '';
+        let partAfter = '';
+        if (stringToParse.indexOf('+') > placeOfSymbol|| stringToParse.indexOf('-') > placeOfSymbol){
+            if (stringToParse.indexOf('+') > stringToParse.indexOf('-')){ 
+                for (let i = stringToParse.indexOf('+'); i < placeOfSymbol; i++){
+                    partBefore+=stringToParse[i]; 
+                }
+                console.log(partBefore + "tst");
+            }
+        }
+        
+    }
+
+</script>
+
+</html>

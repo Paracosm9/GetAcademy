@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    #board {
+        display: grid;
+        grid-template-columns: repeat(8, 100px);
+        grid-template-rows: repeat(8, 100px);
+    }
+
+    .whitePiece {
+        color: white;
+        text-shadow: 1px 1px gray;
+    }
+
+    .blackPiece {
+        color: black;
+    }
+
+    .lightSquare,
+    .darkSquare {
+        font-size: 450%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .lightSquare {
+        background-color: rgb(240, 217, 181);
+    }
+
+    .darkSquare {
+        background-color: rgb(181, 136, 99);
+    }
+</style>
+
+<body>
+    <div id="board">
+
+    </div>
+    <script>
+        drawBoard();
+        function drawBoard() {
+            drawBlackRows(); 
+            drawMiddleRows(); 
+            drawWhiteRows(); 
+        }
+        function drawBlackRows(){
+            for (let i = 1; i <= 16; i++){
+                if (i % 2 == 0) {
+                    switch (i){
+                        case 2: drawCell("darkSquare", "blackPiece", "♞");  break;  
+                        case 4: drawCell("darkSquare", "blackPiece", "♛");  break;  
+                        case 6: drawCell("darkSquare", "blackPiece", "♝");  break;  
+                        case 8: drawCell("darkSquare", "blackPiece", "♜");  break;  
+                    }
+                }
+                else{
+                    switch (i) {
+                        case 1: drawCell("lightSquare", "blackPiece", "♜"); break;
+                        case 3: drawCell("lightSquare", "blackPiece", "♝"); break;
+                        case 5: drawCell("lightSquare", "blackPiece", "♚"); break;
+                        case 7: drawCell("lightSquare", "blackPiece", "♞"); break;
+                    }
+                }
+                if (i > 8){
+                    if (i % 2 != 0) {
+                        drawCell("darkSquare", "blackPiece", "♟");
+                    }
+                    else {
+                        drawCell("lightSquare", "blackPiece", "♟");
+                    }
+                }
+            }
+        }
+        function drawMiddleRows(){
+            let isWhite = true; 
+            for (let i = 1; i <= 32; i++) {
+
+                if (isWhite) {
+                    drawCell("lightSquare", "", "");
+                    if (i % 8 != 0){
+                        isWhite = false; 
+                    }
+                }
+                else { 
+                    drawCell ("darkSquare", "", ""); 
+                    if (i % 8 != 0){
+                        isWhite = true; 
+                    }
+                }
+            }
+        }
+        function drawWhiteRows(){
+            for (let i = 1; i <= 16; i++){
+                
+                if (i <= 8){
+                    if (i % 2 != 0) {
+                        drawCell("lightSquare", "whitePiece", "♟");
+                        
+                    }
+                    else {
+                        drawCell("darkSquare", "whitePiece", "♟");
+                    }
+                }
+                if (i % 2 == 0) {
+                    switch (i){
+                        case 10: drawCell("lightSquare", "whitePiece", "♞");  break;  
+                        case 12: drawCell("lightSquare", "whitePiece", "♛");  break;  
+                        case 14: drawCell("lightSquare", "whitePiece", "♝");  break;  
+                        case 16: drawCell("lightSquare", "whitePiece", "♜");  break;  
+                    }
+                }
+                else{
+                    switch (i) {
+                        case 9: drawCell("darkSquare", "whitePiece", "♜"); break;
+                        case 11: drawCell("darkSquare", "whitePiece", "♝"); break;
+                        case 13: drawCell("darkSquare", "whitePiece", "♚"); break;
+                        case 15: drawCell("darkSquare", "whitePiece", "♞"); break;
+                    }
+                }
+            }
+        }
+
+       function drawCell(color, piece, icon){ 
+            document.getElementById("board").innerHTML += /*HTML*/`
+            <div class="${color} ${piece}">${icon}</div>
+            `;
+        }
+    </script>
+</body>
+
+</html>

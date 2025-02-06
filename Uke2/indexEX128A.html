@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.128A</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        let clicker = 1;
+        let counter = 0; 
+        let step = 10; 
+        document.getElementById("app").innerHTML = drawCounterAndTwoButtons();
+        function drawCounterAndTwoButtons() {
+            return /*HTML*/`
+                <div id = "txt">${clicker}</div>
+                <button id = "txtBttn" onclick =  "plusToResult(clicker)">Øke med ${clicker + counter}</button>
+                <button onclick = "plusOneToClick(clicker)">Oppgradering +1 per click</button>
+            `;
+
+        }
+        function plusToResult() {
+            clicker++; 
+            clicker += counter; 
+            document.getElementById("txt").innerHTML = clicker ; 
+        }
+       function plusOneToClick(){
+            if (clicker >= step) {
+                counter += 1; 
+                clicker -= step; 
+                document.getElementById("txt").innerHTML = clicker;  
+                document.getElementById("txtBttn").textContent = `Øke med ${1 + counter}`
+            }
+       }
+    </script>
+</body>
+
+</html>

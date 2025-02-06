@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    #board {
+        display: grid;
+        grid-template-columns: repeat(8, 100px);
+        grid-template-rows: repeat(8, 100px);
+    }
+
+    .whitePiece {
+        color: white;
+        text-shadow: 1px 1px gray;
+    }
+
+    .blackPiece {
+        color: black;
+    }
+
+    .lightSquare,
+    .darkSquare {
+        font-size: 450%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .lightSquare {
+        background-color: rgb(240, 217, 181);
+    }
+
+    .darkSquare {
+        background-color: rgb(181, 136, 99);
+    }
+</style>
+
+<body>
+    <div id="board">
+
+    </div>
+    <script>
+        drawBoard();
+        function drawBoard() {
+
+            let firstCellIsWhite = true;
+
+            for (let i = 1; i <= 8; i++) {
+                for (let j = 1; j <= 8; j++) {
+                    drawLogic(i, j, firstCellIsWhite);
+                    if (firstCellIsWhite && (j == 8)) {
+                        firstCellIsWhite = false;
+                    }
+                    else if (firstCellIsWhite == false && (j == 8)) {
+                        firstCellIsWhite = true;
+                    }
+                }
+            }
+        }
+
+        function drawLogic(i, j, firstCellIsWhite) {
+            let chessRowBlack = 2;
+            let chessRowWhite = 7;
+            let blackFiguresRow = 1;
+            let whiteFiguresRow = 8;
+
+            if (firstCellIsWhite) {
+                if (j % 2 == 0) {
+                    if (i == blackFiguresRow) {
+                        switch (j) {
+                            case 2: drawBlackCell('blackPiece', '♞', true); break;
+                            case 4: drawBlackCell('blackPiece', '♛', true); break;
+                            case 6: drawBlackCell('blackPiece', '♝', true); break;
+                            case 8: drawBlackCell('blackPiece', '♜', true); break;
+                        }
+                    }
+
+                     else {
+                        i == chessRowWhite ? drawBlackCell('whitePiece', '♟', true) : drawBlackCell();}
+                }
+                else {
+                    if ( i == blackFiguresRow) {} 
+                    i == chessRowWhite ? drawWhiteCell('whitePiece', '♟', true) : drawWhiteCell();
+                }
+            }
+            else { //first cell is black;
+                if (j % 2 == 0) {
+
+                    i == chessRowBlack ? drawWhiteCell('blackPiece', '♟', true) : drawWhiteCell();
+
+                }
+                else {
+                    console.log ("")
+                    
+                
+                        i == chessRowBlack ? drawBlackCell('blackPiece', '♟', true) : drawBlackCell();
+                
+                }
+            }
+        }
+
+        function drawWhiteCell(classPiece, icon, figure) {
+            console.log(classPiece);
+            if (!figure) {
+                console.log("AAAAAA");
+                document.getElementById("board").innerHTML += /*HTML*/`
+                <div class="lightSquare"></div> 
+                `;
+            }
+            else {
+                document.getElementById("board").innerHTML += /*HTML*/`
+                <div class="lightSquare ${classPiece}">${icon}</div> 
+                `;
+            }
+        }
+
+        function drawBlackCell(classPiece, icon, figure) {
+            if (!figure) {
+                document.getElementById("board").innerHTML += /*HTML*/`
+                <div class="darkSquare"></div> 
+                `;
+            }
+            else {
+                document.getElementById("board").innerHTML += /*HTML*/`
+                <div class="darkSquare ${classPiece}">${icon}</div> 
+                `;
+            }
+        }
+        //     <div class="lightSquare blackPiece">♜</div>
+        // <div class="darkSquare blackPiece">♞</div>
+        // <div class="lightSquare blackPiece">♝</div>
+        // <div class="darkSquare blackPiece">♛</div>
+        // <div class="lightSquare blackPiece">♚</div>
+        // <div class="darkSquare blackPiece">♝</div>
+        // <div class="lightSquare blackPiece">♞</div>
+        // <div class="darkSquare blackPiece">♜</div>
+
+        // <div class="darkSquare blackPiece">♟</div>
+        // <div class="lightSquare blackPiece">♟</div>
+        // <div class="darkSquare blackPiece">♟</div>
+        // <div class="lightSquare blackPiece">♟</div>
+        // <div class="darkSquare blackPiece">♟</div>
+        // <div class="lightSquare blackPiece">♟</div>
+        // <div class="darkSquare blackPiece">♟</div>
+        // <div class="lightSquare blackPiece">♟</div>
+
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+        // <div class="darkSquare"></div>
+        // <div class="lightSquare"></div>
+
+        // <div class="lightSquare whitePiece">♟</div>
+        // <div class="darkSquare whitePiece">♟</div>
+        // <div class="lightSquare whitePiece">♟</div>
+        // <div class="darkSquare whitePiece">♟</div>
+        // <div class="lightSquare whitePiece">♟</div>
+        // <div class="darkSquare whitePiece">♟</div>
+        // <div class="lightSquare whitePiece">♟</div>
+        // <div class="darkSquare whitePiece">♟</div>
+
+        // <div class="darkSquare whitePiece">♜</div>
+        // <div class="lightSquare whitePiece">♞</div>
+        // <div class="darkSquare whitePiece">♝</div>
+        // <div class="lightSquare whitePiece">♛</div>
+        // <div class="darkSquare whitePiece">♚</div>
+        // <div class="lightSquare whitePiece">♝</div>
+        // <div class="darkSquare whitePiece">♞</div>
+        // <div class="lightSquare whitePiece">♜</div>
+
+
+
+    </script>
+</body>
+
+</html>
