@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ex.145D</title>
+    <style type="text/css">
+        div:not(#app) {
+            float: left;
+            background-color: beige;
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            vertical-align: middle;
+            font-family: helvetica;
+            font-size: 200%;
+            border: #bbbbaa solid 4px;
+            border-radius: 10px;
+        }
+         
+            div > #resultBox {
+                width: 344px;
+                text-align: right;
+            }
+
+           .firstInRow {
+                clear: left;
+            }
+    </style>
+</head>
+<body>  
+    <div id = "app"></div>
+
+<script type="text/javascript">
+    
+
+     drawStart();// idk why I can't use onload on div app... Hm. 
+    function drawStart() {
+        document.getElementById("app").innerHTML = /*HTML*/`
+            <div id="resultBox"></div>
+            <div class="firstInRow" onclick="addCharacter(7)">7</div>
+            <div onclick="addCharacter(8)">8</div>
+            <div onclick="addCharacter(9)">9</div>
+            <div onclick="addCharacter('÷')">÷</div>
+
+            <div class="firstInRow" onclick="addCharacter(4)">4</div>
+            <div onclick="addCharacter(5)">5</div>
+            <div onclick="addCharacter(6)">6</div>
+            <div onclick="addCharacter('×')">×</div>
+
+            <div class="firstInRow" onclick="addCharacter(1)">1</div>
+            <div onclick="addCharacter(2)">2</div>
+            <div onclick="addCharacter(3)">3</div>
+            <div onclick="addCharacter('-')">-</div>
+
+            <div class="firstInRow" onclick="addCharacter(0)">0</div>
+            <div onclick="clearResult();">C</div>
+            <div onclick="calculate()">=</div>
+            <div onclick="addCharacter('+')">+</div>
+                `; 
+    }
+    //model
+    var resultBox = document.getElementById('resultBox'); //put it here... Because before drawstart it is undefined.
+    let stringRepresentation = ''; 
+
+   
+    //view
+    function drawScreen (){
+        resultBox.innerHTML = stringRepresentation;
+    }
+    function clearResult() {
+        stringRepresentation = '';
+        drawScreen();
+    }
+    //controller
+    function calculate() {
+        var calculation = stringRepresentation.replace('×', '*').replace('÷', '/');
+        stringRepresentation = eval(calculation);
+        drawScreen();
+    }
+    function addCharacter(x) {
+       stringRepresentation += x;
+       drawScreen();
+    }
+</script>
+</body>
+</html>

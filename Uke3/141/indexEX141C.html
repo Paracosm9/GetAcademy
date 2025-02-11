@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.141C</title>
+</head>
+<style>
+    .added{
+        height: 50px; 
+        width: 50px; 
+    }
+</style>
+<body>
+    <div id="btns"></div>
+    
+
+    <script>
+        //model
+        let colorBg = '';
+        let colorFg = ''; //hadn't best decision, I assume.
+        let idForBG = "bg";
+        let idForFG = "fg";
+        drawStart();
+
+        //view
+        function drawStart() {
+            document.getElementById("btns").innerHTML = /*HTML*/`
+            <button id = "bt" onclick="updateView()">Add color</button>
+                ${drawSelect(idForBG)}  
+                ${drawSelect(idForFG)}
+            ` ;
+        }
+        function updateView() {
+            document.body.innerHTML += /*HTML*/`
+            <div class = "added" style="background-color:${colorBg}; color:${colorFg};">Some text</div>         
+            `;
+        }
+
+        function drawSelect(id) {
+            return /*HTML*/`
+            <select name="colors" id="${id}" onchange = "updateVariables(id,value)">
+                <option value="">--Please choose a color--</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+            </select>
+            `;
+        }
+
+        //controller
+        function updateVariables (id, value){
+            console.log(value);
+            if (id == idForBG) {
+                colorBg = value; 
+            } else {
+                colorFg = value; 
+            }
+        }
+        
+       
+    </script>
+</body>
+
+</html>

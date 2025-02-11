@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.141D</title>
+</head>
+<body>
+    <div id = "app"></div>
+
+    <script>
+        //model
+        let nameFromInput = ''; 
+        let emailFromInput = ''; 
+        let myApp = document.getElementById("app"); 
+        
+        drawForm();
+
+        //view
+        function drawForm () {
+            myApp.innerHTML = /*HTML*/`
+        <form>
+            <label for="fname">Fornavn:</label><br>
+            <input type="text" id="fname" name="fname" value = ${nameFromInput == '' ? "" : nameFromInput}><br>
+            <label for="mail">E-mail: </label><br>
+            <input type="text" id="mail" name="lname" value = ${emailFromInput == '' ? "" : emailFromInput}>
+        </form>
+        <button onclick = "saveData()">Registrer</button>
+        
+        `; 
+        }
+
+        function printEditedData (){
+            myApp.innerHTML = /*HTML*/`
+            <h3>Navnet ditt: ${nameFromInput}</h3>
+            <h3>Email din: ${emailFromInput}</h3>
+            <button onclick = "drawForm()">Rediger</button>
+            `; 
+        }
+
+        //controller
+        function saveData(){
+            nameFromInput = document.getElementById("fname").value; 
+            emailFromInput = document.getElementById("mail").value; 
+            printEditedData(); 
+        }
+
+        
+    </script>
+</body>
+</html>

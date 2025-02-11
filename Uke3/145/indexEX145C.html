@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.145C</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <div id="txt">
+
+    </div>
+
+    <script>
+        //model
+        let guessedNumber = getRandomNumber(1, 100);
+        let numberFromInput = ''; 
+
+        onStart();
+
+        //view
+        function onStart() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+                <div>
+                    <input type = "number" id = "num">
+                </div>
+                <button onclick = "guessLogic()">Gjette number mellom 1 og 100</button> 
+            `;
+        }
+        
+        function writeResult (text) {
+            document.getElementById("txt").innerHTML = /*HTML*/
+                `${text}`;         
+        }
+
+        //controller
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        function guessLogic() {
+            numberFromInput = document.getElementById("num").value;
+            if(numberFromInput > guessedNumber){
+                writeResult("Number er for høyt");
+            }
+            else if (numberFromInput < guessedNumber) {
+                writeResult("Number er for lav");
+            }
+            else {
+                writeResult("Gratulerer, du vant, number er " + guessedNumber + "!");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

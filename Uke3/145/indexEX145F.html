@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Ex.145F</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <div id="hangman"></div>
+    <script>
+
+        //model
+        let amountOfMoves = 0;
+        let secretText;
+        let guessedLetter;
+        let encryptedText;
+
+
+        //view ? 
+        updateView();
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            ${askWordOrPlay()}
+            
+        `;
+            document.getElementById("hangman").innerHTML = /*HTML*/`
+            <h1>${encryptedText ?? ""}</h1>
+            <div>Moves: ${amountOfMoves}</div>
+        `;
+        }
+
+        function askWordOrPlay() {
+            if (!secretText) {
+                return /*HTML*/`
+                <input type = "text" id = "secret"> <br/>
+                <button onclick = "setSecretText()">Set word to guess!</button>
+
+                    `;
+            }
+            else if (encryptedText.indexOf('_') > -1) {
+                return /*HTML*/`
+            <input type = "text" id = "letter" oninput = "parseLetter()">
+            <button onclick = "evaluateHangman();">Guess letter</button>
+                    `;
+            }
+            else {
+
+                return /*HTML*/`
+                <h1> You have won in ${amountOfMoves} moves!
+                <button onclick = "startAgain();">Start again</button>
+                `;
+            }
+        }
+
+        //controller ???
+        function setClosedWord(index) {
+            if (!encryptedText) {
+                encryptedText = secretText.replaceAll(/([a-zA-z])/g, "_").toLowerCase();
+            }
+            else {
+                changeEncryptedText(index);
+            }
+            updateView();
+        }
+
+        function evaluateHangman() {
+            if (secretText.indexOf(guessedLetter) == -1) {
+                amountOfMoves++;
+                updateView();
+                return;
+            };
+            amountOfMoves++;
+            setClosedWord(secretText.indexOf(guessedLetter));
+        }
+
+        function setSecretText() {
+            if (document.getElementById("secret").value != null) {
+                secretText = document.getElementById("secret").value.toLowerCase();
+            }
+            setClosedWord();
+            updateView();
+        }
+
+        function parseLetter() {
+            guessedLetter = document.getElementById("letter").value.substr(0, 1);
+            console.log(guessedLetter);
+        }
+
+        function changeEncryptedText(index) {
+            let char = secretText.charAt(index);
+            while (secretText.indexOf(char) > -1) {
+                char = secretText.charAt(index);
+                //exchanging secret and encrypted :3
+                let secretTextBeforeGuessedLetter = secretText.substring(0, index);
+                let secretTextAfterGuessedLetter = secretText.substring(index + 1);
+                let encryptedTextBeforeGuessedLetter = encryptedText.substring(0, index);
+                let encryptedTextAfterGuessedLetter = encryptedText.substring(index + 1);
+                //setting new values
+                encryptedText = encryptedTextBeforeGuessedLetter + char + encryptedTextAfterGuessedLetter;
+                secretText = secretTextBeforeGuessedLetter + "_" + secretTextAfterGuessedLetter;
+                if (secretText.indexOf(char) > -1) {
+                    index = secretText.indexOf(char);
+                }
+            }
+        }
+
+        function startAgain() {
+            amountOfMoves = 0;
+            secretText = undefined;
+            guessedLetter = undefined;
+            encryptedText = undefined;
+            updateView();
+        }
+    </script>
+</body>
+
+</html>
