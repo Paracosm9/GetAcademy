@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151G</title>
+</head>
+<style>
+</style>
+
+<body>
+
+    <pre id="output"></pre>
+    <script>
+        function writeHash() {
+            document.getElementById('output').innerText += '#';
+        }
+
+        function writeSpace() {
+            document.getElementById('output').innerText += ' ';
+        }
+
+        function writeLineBreak() {
+            document.getElementById('output').innerText += '\n';
+        }
+        //model
+        let rowLength = 8;
+        let amountOfRows = rowLength / 2;
+
+        drawTriangleOrWhatIsit();
+
+        function drawTriangleOrWhatIsit() {
+            for (let i = 0; i < amountOfRows; i++) {
+                for (let j = 0; j < rowLength; j++) {
+                    // 0 - i * 2 + 2 = hashtags; 
+                    // 0 - rowLength - (i * 2) + 2 // 8 - 2 = 6 = spaces
+                    // 1 - i * 2 + 2 = hashtags; 
+                    // 1 - rowLength - (i * 2) + 2 // 8 - 4 = 4 = spaces
+                    // 2 - i * 2 + 2  = hashtags; 
+                    // 2 - rowLength - (i * 2) + 2 // 8 - 6 = 2 = spaces
+                    // 3 - i * 2 + 2 = hashtags; 
+
+                    // {0 1 2} 3 4 {5 6 7} 
+                    // {0 1} 2 3 4 5 {6 7} 
+                    // {0}1 2 3 4 5 6{7} 
+                    //  0 1 2 3 4 5 6 7 
+                    (j >= i && j <= (rowLength - 1) - i ) ? writeHash() : writeSpace(); 
+                    //to draw pyramid
+                    //(j >= (rowLength - ((i * 2) + 2)) / 2 && j <= rowLength - amountOfRows + i )  ? writeHash() : writeSpace();
+                }
+                writeLineBreak();
+            }
+        }
+
+    </script>
+</body>
+
+</html>

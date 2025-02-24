@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151H</title>
+</head>
+<style>
+</style>
+
+<body>
+
+    <pre id="output"></pre>
+    <script>
+        //view
+        function writeHash() {
+            document.getElementById('output').innerText += '#';
+        }
+
+        function writeSpace() {
+            document.getElementById('output').innerText += ' ';
+        }
+
+        function writeLineBreak() {
+            document.getElementById('output').innerText += '\n';
+        }
+        //model
+        let amountOfRows = 8;
+        let rowLength = amountOfRows;
+
+        drawDiamond();
+        //controller
+        function drawDiamond() {
+            for (let i = 0; i < amountOfRows; i++) {
+                for (let j = 0; j < rowLength; j++) {
+                    let iIsInTheMiddle = (amountOfRows) / 2;
+                    if (i >= iIsInTheMiddle) { //less
+                        (j >= i - iIsInTheMiddle && j <= rowLength - 1 - (i - iIsInTheMiddle))
+                            ? writeHash() : writeSpace();
+                    }
+                    else {
+                        (j >= (rowLength - ((i * 2) + 2)) / 2 && j <= rowLength - amountOfRows / 2 + i)
+                            ? writeHash() : writeSpace();
+                    }
+                }
+                writeLineBreak();
+            }
+        }
+
+    </script>
+</body>
+
+</html>

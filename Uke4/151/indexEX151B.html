@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151B</title>
+</head>
+<style>
+    #app, #app2 {
+        display: grid;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+    #app, #app2 > h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+<body>
+    <div id = "app"></div>
+    <div id = "app2"></div>
+    
+    <script>
+
+        //model 
+        let firstNumber;
+        let secondNumber;
+        let endOfLoop; 
+        let amountOfIterations = 0; 
+        let firstValue; 
+
+        updateView(); 
+        //view
+        function updateView(){
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text">Enter first number: </label>
+            <input type="number" id = "number1" oninput = "firstNumber = parseInt(this.value)" ><br />
+            <label for="number">Enter amount of growth: </label>
+            <input type="number" id = "number2" oninput = "secondNumber = parseInt(this.value)" ><br />
+            <label>Enter number, that our loop should not overstep: </label>
+            <input type="number" id = "number3" oninput = "endOfLoop = parseInt(this.value)">
+            <button id = "1" onclick="doTheLoop()">Do the calculations</button><br />
+            `; 
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML(){
+            if (firstValue){
+                return /*HTML*/`
+                <h1>Loop started from ${firstValue}, and was working while iterator was less than ${endOfLoop} </h1>
+                <h1>On each step of loop, first number grows with ${secondNumber} value.  </h1>
+                <h1>That took  ${amountOfIterations} iterations to reach that point.  </h1>
+                `; 
+            }  return ``;     
+        }
+
+        //controller
+        function doTheLoop(){
+            firstValue = firstNumber; 
+            for (firstNumber; firstNumber < endOfLoop; firstNumber+=secondNumber){
+                amountOfIterations++; 
+            }
+            updateView(); 
+        }
+
+       
+    </script>
+</body>
+</html>

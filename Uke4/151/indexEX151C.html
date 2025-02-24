@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151С</title>
+</head>
+<style>
+    #app, #app2 {
+        display: grid;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+    #app, #app2 > h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+<body>
+    <div id = "app"></div>
+    <div id = "app2"></div>
+    
+    
+    <script>
+
+        //model 
+        let startText; 
+        let afterText;
+
+        updateView(); 
+        //view
+        function updateView(){
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text">Enter text to reverse: </label>
+            <input type="text" id = "text1" oninput = "startText = this.value" ><br />
+            <button onclick="doTheLoop()">Reverse it!</button>
+            `; 
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML(){
+            if (startText){
+                return /*HTML*/`
+                <h1>The text you entered is ${startText}, and ${afterText} is the reversed version.</h1>
+                `; 
+            }  return ``;     
+        }
+
+        //controller
+        function doTheLoop(){
+            afterText = '';
+            for (let i = startText.length - 1; i >= 0; i--){
+            console.log(i);
+                afterText += startText.charAt(i); 
+            }
+            updateView(); 
+        }
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151A</title>
+</head>
+<style>
+    #app{
+        display: grid;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+    #app > h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+<body>
+    <div id = "app"></div>
+    
+    <script>
+
+        //model 
+        let maxLength1; 
+        let text; 
+
+        updateView(); 
+        //view
+        function updateView(){
+            document.getElementById("app").innerHTML = /*HTML*/`
+             <label for="text">Enter text: </label>
+            <input type="text" id = "text2" oninput = "text = this.value" ><br />
+            <label>Enter max length: </label>
+            <input type="number" id = "number2" oninput = "maxLength1 = parseInt(this.value)">
+            <button id = "1" onclick="doubleOurText()">Repeat</button><br />
+            <h1>${text ?? ""}</h1>
+            `; 
+        }
+
+        //controller
+        function doubleOurText(){
+            while (text.length < maxLength1 ){
+                text += text;
+            }
+            updateView();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151F</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: grid;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+
+
+    <script>
+
+        //model 
+        let startText;
+        let charToCount;
+        let amountOfEnteredLetter = 0;
+        let counter = 0;
+
+        updateView();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text1">Enter text for count your letter in! </label>
+            <textarea id = "text1" rows = "5" cols = "75" oninput = "startText = this.value" ></textarea><br />
+            <label for="text">Enter the letter you want to count! </label>
+            <input type="text" id = "text1" oninput = "charToCount = this.value.charAt(0)" ><br />
+            <button onclick="doTheLoop()">Count your letter</button>
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML() {
+            if (startText) {
+                return /*HTML*/`
+                <h1>There are ${counter} "${charToCount}" in your text!</h1>
+                `;
+            } return ``;
+        }
+
+        //controller
+        function doTheLoop() {
+            for (let i = 0; i <= startText.length; i++) {
+                if (startText.charAt(i) == charToCount) {
+                    amountOfEnteredLetter++;
+                }
+            }
+            counter = amountOfEnteredLetter;
+            amountOfEnteredLetter = 0;
+            updateView();
+        }
+
+
+    </script>
+</body>
+
+</html>

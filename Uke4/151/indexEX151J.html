@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.151J</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: grid;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+
+    button.custom-button {
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button.custom-button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+
+
+    <script>
+
+        //model 
+        let startText;
+        let spaceBreaker = ' ';
+        let amountOfSpaces = 0;
+        let amountOfVowels = 0;
+        let theLongestWord = "";
+
+        updateView();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text1">Enter text to see some statistics </label>
+            <textarea id = "text1" rows = "5" cols = "75" oninput = "startText = this.value" ></textarea><br />
+            <button class = "custom-button" onclick="doStatistics()">Do statistics</button>
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML() {
+            if (startText) {
+                return /*HTML*/`
+                <h1>There are ${counter + 1} word(s) in your text!</h1>
+                <h1>There are ${count} vowel(s) in your text!</h1>
+                <h1>The longest word in your text was ${maxWord} and it's length is ${lengthOfMaxWord}</h1>
+                `;
+            } return ``;
+        }
+
+        //controller
+        function doStatistics() {
+            countSpaces();
+            countVowels();
+            getTheLongestWord(); 
+            updateView();
+        }
+        function countSpaces() {
+            //this could also be done without for loop) 
+            for (let i = 0; i <= startText.length; i++) {
+                if (startText.charAt(i) == spaceBreaker) {
+                    amountOfSpaces++;
+                }
+            }
+            counter = amountOfSpaces;
+            amountOfSpaces = 0;
+        }
+
+        function countVowels() {
+            for (let i = 0; i <= startText.length; i++) {
+                if (isVowel(startText.charAt(i))) {
+                    amountOfVowels++;
+                }
+            }
+            count = amountOfVowels;
+            amountOfVowels = 0;
+        }
+        function isVowel(charToTest) {
+            charToTest = charToTest.toLowerCase();
+            console.log(charToTest == 'a');
+            return (charToTest == 'a' ||
+                charToTest == 'o' ||
+                charToTest == 'e' ||
+                charToTest == 'y' ||
+                charToTest == 'u' ||
+                charToTest == 'i' ||
+                charToTest == 'å' ||
+                charToTest == 'æ' ||
+                charToTest == 'ø');
+
+        }
+        function getTheLongestWord(){
+            let splittedText = startText.replaceAll(/[,.!?]/g, "").split(" "); 
+            let maxLength = 0; 
+            for (const i in splittedText) {
+                if (splittedText[i].length > maxLength) {
+                    maxLength = splittedText[i].length; 
+                    theLongestWord = splittedText[i];
+                }
+            }
+            lengthOfMaxWord = maxLength; 
+            maxWord = theLongestWord; 
+            theLongestWord = ""; 
+        }
+
+    </script>
+</body>
+
+</html>
