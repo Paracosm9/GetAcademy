@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.153G</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+        ;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+
+    button.custom-button {
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <script>
+
+        //model 
+        let numbers = [];
+        let textFromUser = '';
+        let frequencyTable = [];
+        let index = 0; 
+        let maxFrequency = 0; 
+
+        updateView();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text1">Enter array in format "1,2,3":  </label><br>
+            <textarea id = "text1" rows = "5" cols = "75" oninput = "numbers = this.value.split(',')" ></textarea><br />
+            <button class = "custom-button" onclick = "createFrequencyTable(),showMax()">Show frequency table</button>
+           
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML() {
+            return frequencyTable.length == 0 ? `` : /*HTML*/`
+                <h1>Array you have entered is : ${numbers} </h1> <br>
+                <h3>The most frequent number in table is ${index}, this number occurs ${maxFrequency} time(s)<br> </h3>
+            `;
+        }
+
+        //controller
+
+        function createFrequencyTable() {
+            let max = getMaxNumberInArray();
+            for (let i = 0; i <= max ; i++){
+                    frequencyTable.push(0);  
+            }
+            for (let i = 0; i <= numbers.length; i++ ){
+               frequencyTable[parseInt(numbers[i])]++;
+            }
+        }
+        function getMaxNumberInArray(){
+            let max = 0; 
+            for (let i = 0; i < numbers.length; i++ ){
+                    max = parseInt(numbers[i]) >= max ? parseInt(numbers[i]) : max; 
+            }
+            return max; 
+        }
+
+        function showMax() {
+            maxFrequency = 0; 
+            index = 0; 
+            for (let i = 0; i < frequencyTable.length; i++) {             
+                console.log ("mFreq: " + maxFrequency + " index: " + index + " number in table: " + parseInt(frequencyTable[i]) + " i is : " + i );
+                if(parseInt(frequencyTable[i]) > maxFrequency){
+                    index = i; 
+                    maxFrequency = parseInt(frequencyTable[i]); 
+                }
+            }
+            updateView();
+            frequencyTable = [];
+            numbers = [];
+        }
+    </script>
+</body>
+
+</html>

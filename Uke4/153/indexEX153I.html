@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.153I</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+        ;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+
+    button.custom-button {
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <script>
+
+        //model 
+        let cube = [1, 2, 3, 4, 5, 6];
+        let throws = [0, 0, 0, 0, 0];
+        let frequencyResults = [0, 0, 0, 0, 0, 0];
+        let highestPair = 0; 
+        updateView();
+
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <button class = "custom-button" onclick = "makeThrow(),defineResults()">Throw cubes!</button>
+           
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+
+        function showTheResultsHTML() {
+            return throws[0] == 0 ? `` : /*HTML*/`
+                <h1>Your throw is: ${throws} </h1> <br>
+                <h3>You receive ${highestPair > 0 ? ' a pair of ' + highestPair  + '!': 'no pairs :('} <br> </h3>
+            `;
+        }
+
+        //controller
+        function makeThrow() {
+            for (let i = 0; i < throws.length; i++) {
+                let resultOfThrow = Math.floor(Math.random() * cube[5] + 1);
+                throws[i] = resultOfThrow;
+            }
+        }
+        function defineResults() {
+            createFrequencyTable();
+            for(let i = frequencyResults.length - 1; i >= 0; i--){
+                if(frequencyResults[i] >= 2){
+                    highestPair = i + 1; 
+                    break;
+                }
+            }
+            updateView(); 
+            throws = [0,0,0,0,0]; 
+            frequencyResults = [0, 0, 0, 0, 0, 0];
+            highestPair = 0; 
+        }
+        function createFrequencyTable() {
+            for (let i = 0; i < throws.length; i++) {
+                frequencyResults[throws[i] - 1]++;
+            }
+        }
+
+    </script>
+</body>
+</html>

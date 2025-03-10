@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.153A</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+        ;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        //model 
+        let numbers = [];
+        let html = ``;
+        numbers = fillArrayWithNumbers(numbers);
+        let start = 0;
+        fillStringWithNumbers(start);
+
+        //view
+        function updateView() {
+
+            document.getElementById("app").innerHTML = html;
+            for (let i = 1; i <= 130; i += 10) {
+                if (i - 1 == start) {
+                    document.getElementById("app").innerHTML += /*HTML*/`
+                    <u><label>...</label></u>&nbsp
+                `;
+                    continue;
+                }
+                document.getElementById("app").innerHTML += /*HTML*/`
+                 <u><label onclick = "fillStringWithNumbers(${i - 1})" >${(i - 1) / 10 + 1} </label></u>&nbsp
+                `;
+            }
+        }
+
+        //controller 
+        function fillArrayWithNumbers(arr) {
+            for (let i = 1; i <= 130; i++) {
+                arr.push(i);
+            }
+            return arr;
+        }
+
+        function fillStringWithNumbers(startFrom) {
+            start = startFrom;
+            let end = startFrom + 10;
+            html = ``;
+            html += `<div><h1>`
+            for (let i = startFrom; i < end; i++) {
+                html += numbers[i] == end ? `${numbers[i]}` : `${numbers[i]},`
+            }
+            html += `</h1></div>`
+            updateView();
+        }
+
+    </script>
+</body>
+
+</html>

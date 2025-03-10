@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.152D</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: grid;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+
+    button.custom-button {
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button.custom-button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+
+    #tableData {
+        border: 1px solid rgb(13, 66, 68);
+        align-items: center;
+        text-align: center;
+    }
+
+    td,
+    th {
+        border: 1px solid rgb(13, 66, 68);
+        padding: 0;
+    }
+
+    td:nth-child(even) {
+        background-color: rgb(13, 66, 68);
+        color: antiquewhite;
+    }
+</style>
+<!-- 
+ Skriv en funksjon som tar en liste av tall som parameter 
+ og som returnerer true eller false basert på om listen er sortert eller ikke. 
+ Du skal bare gå gjennom listen en gang med kun én løkke.
+-->
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <script>
+
+        //model 
+        let startText;
+        let arrayIsMinMax = true;
+        let arrayIsMaxMin = true;
+
+        updateView();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text1">Please, enter an array in format 1,2,4,5,6,1,2 </label>
+            <textarea id = "text1" rows = "5" cols = "75" oninput = "startText = this.value" ></textarea><br />
+            <button class = "custom-button" onclick="checkTheArray()">Check the array</button>
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+
+        function showTheResultsHTML() {
+            return startText ? showResult() : ``;
+        }
+
+        function showResult() {
+            return (arrayIsMaxMin || arrayIsMinMax) ? /*HTML*/`
+        
+        <label>Here's your array: ${startText} </label><br />
+        <h2>Numbers in array is sorted in ${arrayIsMinMax ? "ascending" : "descending"} order!</h2>`
+
+                :
+
+                `<label>Here's your array: ${startText} </label><br />
+         <h2>Numbers in array is not sorted, sorry :(</h2>`;
+
+        }
+
+        //controller
+        function checkTheArray() {
+            isArraySorted();
+            updateView();
+        }
+
+        function isArraySorted() {
+            let splittedText = startText.split(",");
+            for (let i = 0; i < splittedText.length; i++) {
+                if (splittedText[i + 1] != undefined) {
+                    //comparing with undefined gives false, so decision upper. 
+                    if (parseInt(splittedText[i]) <= parseInt(splittedText[i + 1]) && arrayIsMinMax) {
+                        arrayIsMinMax = true;
+                    }
+                    else {
+                        arrayIsMinMax = false;
+                    }
+                }
+                if (splittedText[splittedText.length - i - 2] != undefined) {
+
+                    if (parseInt(splittedText[splittedText.length - i - 1]) <= parseInt(splittedText[splittedText.length - i - 2]) && arrayIsMaxMin) {
+                        arrayIsMaxMin = true;
+                    }
+                    else {
+                        arrayIsMaxMin = false;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

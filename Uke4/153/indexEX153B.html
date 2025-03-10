@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.153B</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+        ;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+    button{
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        //model 
+        let numbers = [];
+        let html = ``;
+        let oddOrEven = 0; // 0 = all , 1 = even, 2 = odd
+        numbers = fillArrayWithNumbers(numbers);
+        let start = 0;
+        let amountToTake = 10; 
+        fillStringWithNumbers(start);
+
+        //view
+        function updateView() {
+
+            document.getElementById("app").innerHTML = html;
+            for (let i = 1; i <= 130; i += 10) {
+                if (i - 1 == start) {
+                    document.getElementById("app").innerHTML += /*HTML*/`
+                    <u><label>...</label></u>&nbsp
+                `;
+                    continue;
+                }
+                document.getElementById("app").innerHTML += /*HTML*/`
+                 <u><label onclick = "fillStringWithNumbers(${i - 1})" >${(i - 1) / 10 + 1} </label></u>&nbsp
+                `;
+            }
+            drawButtons();
+        }
+
+        function drawButtons() {
+            document.getElementById("app").innerHTML += /*HTML*/`
+                <div>
+                <button onclick = "changeOddOrEven(0)">Show all</button>
+                <button onclick = "changeOddOrEven(1)">Show even</button>
+                <button onclick = "changeOddOrEven(2)">Show odd</button>
+                 </div>
+                `;
+        }
+
+        //controller 
+        function fillArrayWithNumbers(arr) {
+            for (let i = 1; i <= 130; i++) {
+                arr.push(i);
+            }
+            return arr;
+        }
+
+        function fillStringWithNumbers(startFrom) {
+            start = startFrom;
+            let end = startFrom + amountToTake;
+            html = ``;
+            html += `<div><h1>`
+            for (let i = startFrom; i < end; i++) {
+                if (oddOrEven == 0) {
+                    html += `${numbers[i]} `
+                }
+                else if (oddOrEven == 1) {
+                    if (numbers[i] % 2 == 0) {
+                        html += `${numbers[i]} `
+                    }
+                }
+                else {
+                    if (numbers[i] % 2 != 0) {
+                        html += `${numbers[i]} `
+                    }
+                }
+            }
+            html += `</h1></div>`
+            updateView();
+        }
+
+        function changeOddOrEven(newValue){
+            oddOrEven = newValue; 
+            fillStringWithNumbers(start);
+            updateView();
+        }
+
+
+
+    </script>
+</body>
+
+</html>

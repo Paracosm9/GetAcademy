@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.152B</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        width: 300px;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+
+    button.custom-button {
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button.custom-button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+</style>
+<body>  
+    <div id = "app"></div>
+    <script>
+        //model
+        let numbers = [1,2,3,4,5,100];
+        let sumOfNumbers = 0; 
+        
+        getArrayWithNumbers();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label>Here's array with data: ${numbers.toString()} </label><br />
+            <h2>The sum of numbers in array is: ${sumOfNumbers}</h2>
+            `;
+        }
+        //controller
+        function getArrayWithNumbers(){
+            for (let i = 0; i < numbers.length; i++){
+                    sumOfNumbers += numbers[i]; 
+            }
+            updateView();
+        }
+    </script>
+</body>
+</html>

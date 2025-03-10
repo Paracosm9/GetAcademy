@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.153C</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+        ;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+    button.custom-button{
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+
+</style>
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <script>
+
+        //model 
+        let alphabet = 'ABCDEFGHIJKLMOPQRSTUVWXYZÆØÅ'; 
+        let cryptoString = 'ÅØÆYUOIEABCDFGHJKLMPQRSTVWXZ';
+        let alphabetArr = []; 
+        let cryptedArr = []; 
+        let textFromUser = ''; 
+        let cryptedText = '';
+        let decryptedText = '';        
+
+        makeArrays(); 
+
+        updateView();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text1">Enter text to cipher </label><br>
+            <textarea id = "text1" rows = "5" cols = "75" oninput = "textFromUser = this.value.toUpperCase()" ></textarea><br />
+            <button class = "custom-button" onclick="turnBackText(cryptedArr, alphabetArr, cryptedText)">Cypher the text!</button>
+            <button class = "custom-button" onclick="turnBackText(alphabetArr,cryptedArr, decryptedText)">Decypher the text!</button>
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML(){
+            return textFromUser == '' ?  `` : /*HTML*/`
+                <h1>Text you have entered is : ${textFromUser} </h1> <br>
+                <h1>You choose to ${cryptedText == '' ? "decrypt it! " : "crypt it!" } </h1> <br>
+                <h1>${cryptedText == '' ? "De" : "C"}rypted text is : ${cryptedText == '' ? decryptedText : cryptedText} </h1>
+            `;
+        } 
+
+        //controller
+        function makeArrays(){
+            for(let i = 0; i < alphabet.length; i++){
+                alphabetArr.push(alphabet.charAt(i)); 
+                cryptedArr.push(cryptoString.charAt(i)); 
+            }      
+        }
+      
+        function turnBackText(arrFrom, arrayTo, text){
+            console.log (text);
+            for (let i = 0; i < textFromUser.length; i++){
+                text += arrFrom[arrayTo.indexOf(textFromUser.charAt(i))]; 
+            }
+            cryptedText = arrFrom[0] == 'Å' ? text : ''; 
+            decryptedText = arrFrom[0] == 'Å' ? '' : text; 
+            updateView();
+            textFromUser = '';
+            decryptedText = '';
+            cryptedText = '';
+        }
+    </script>
+</body>
+
+</html>
