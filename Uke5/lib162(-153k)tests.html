@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <div id='content'></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="lib162153K.js"></script>
+    <script>
+
+        QUnit.test("Select bar'", function (assert) {
+
+            numbers = [1,2,2,3];
+            barsSelected = [0,0,0,0];
+            let testIndexForBarSelected = '2';
+            let bars = selectBar(testIndexForBarSelected);
+            let expected = [0, 1, 0, 0, 0]; // bars start from 1 to 5, so 2 = [0,1,0,0,0]
+            assert.equal(bars[1], expected[1]);
+        });
+
+        QUnit.test("Remove bar'", function (assert) {
+            barToRemoveIndex = '1';
+            bars = removeBar();
+            let expected = [1, 0, 0, 0]; // bars start from 1 to 5, so 1 = [1,0,0,0,0]
+            assert.equal(bars[1], expected[1]);
+        });
+
+        QUnit.test("Change bar'", function (assert) {
+            numbers = [1,2,3,4];
+            barsSelected = [0,1,0,0];
+            inputValue = 8; 
+            bars = changeBar();
+            let expected = [1, 8, 3, 4]; // bars start from 1 to 5, so 1 = [1,0,0,0,0]
+            assert.equal(bars[0], expected[0]);
+            assert.equal(bars[1], expected[1]);
+            assert.equal(bars[2], expected[2]);
+            assert.equal(bars[3], expected[3]);
+            assert.equal(barsSelected[1], 0);
+
+        });
+        QUnit.test("Add bar'", function (assert) {
+            numbers = [1,2,3,4];
+            barsSelected = [0,0,0,0];
+            inputValue = 1; 
+            bars = addBar();
+            let expected = [1, 2, 3, 4, 1]; // bars start from 1 to 5, so 1 = [1,0,0,0,0]
+            assert.equal(bars[4], expected[4]);
+            assert.equal(barsSelected.length, 5);
+
+        });
+        QUnit.test("Add bar'", function (assert) {
+            numbers = [1,2,3,4];
+            barsSelected = [0,0,0,0];
+            inputValue = 1; 
+            bars = addBar();
+            let expected = [1, 2, 3, 4, 1]; // bars start from 1 to 5, so 1 = [1,0,0,0,0]
+            assert.equal(bars[4], expected[4]);
+            assert.equal(barsSelected.length, 5);
+
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>
