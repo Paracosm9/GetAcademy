@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.171E</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: block;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        align-content: center;
+        ;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+    button.custom-button{
+        padding: 1em 2em;
+
+        background-color: antiquewhite;
+        border: 2px solid black;
+        color: rgb(13, 66, 68);
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background-color: #f5e6d0;
+        transform: scale(1.05);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <script>
+        //model 
+
+        let splittedText = [];
+        let wordCounts = {};
+        let text = '';
+        let frequentWord = ''; 
+        let wordMax = 0; 
+
+        updateView();
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            <label for="text1">Enter text to get the most common word </label><br>
+            <textarea id = "text1" rows = "5" cols = "75" oninput = "text = this.value.toLowerCase()" ></textarea><br />
+            <button class = "custom-button" onclick="countWords()">Define the most frequent word!</button>
+           
+            `;
+            document.getElementById("app2").innerHTML = /*HTML*/`
+            ${showTheResultsHTML()}
+            `;
+        }
+        function showTheResultsHTML() {
+            return text == '' ? `` : /*HTML*/`
+                <h1>The most common word is "${frequentWord}", it's count is ${wordCounts[frequentWord]}!</h1>
+            `;
+        }
+
+        //controller
+        function countWords() {
+           let words = text.split(' ');
+        
+    
+            for (let i = 0; i < words.length; i++) {
+                if (wordCounts[words[i]]) {
+                    wordCounts[words[i]]++
+                }
+                else {
+                    wordCounts[words[i]] = 1
+                }
+            }
+            for (let word in wordCounts){
+            
+                if(parseInt(wordCounts[word]) > wordMax){
+                    console.log(wordCounts[word], wordMax); 
+                    wordMax = parseInt(wordCounts[word]); 
+                    
+                    frequentWord = word; 
+                }
+            }
+            updateView();
+        }
+
+    </script>
+</body>
+
+</html>

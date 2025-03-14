@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.171D</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: grid;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        grid-template-columns: auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //model
+        let color = {
+            red: getRandomColor(),
+            green: getRandomColor(),
+            blue: getRandomColor()
+        }
+        let invertedColor = inverseColors(); 
+        let middleColor = getMiddleColor(color, invertedColor); 
+        let colors = [];
+
+        let lengthOfColors = 5;
+        fillColors(color); 
+
+        updateView();
+        function updateView() {
+            let element = document.getElementById("app"); 
+            for (color of colors){
+                element.innerHTML += /*HTML*/`
+                <div style = "width: 150px; height: 150px; background-color: rgb(${color.red}, ${color.green}, ${color.blue})">
+                    Red: ${color.red}, <br>
+                    Green: ${color.green}, <br>
+                    Blue: ${color.blue}
+                    </div>
+                `;
+            }
+        }
+
+        function fillColors(color) {
+            console.log(color);
+            for (let i = 0; i < lengthOfColors; i++){
+                if (i == 0){
+                  colors.push(color);
+                }
+                else if (i == 1){
+                    colors.push (getMiddleColor(color, middleColor));
+                }
+                else if (i == 2) {
+                    colors.push(middleColor); 
+                }
+                else if (i == 3) {
+                    colors.push(getMiddleColor(middleColor, invertedColor)); 
+                }
+                else if (i == 4 ){
+                    colors.push(invertedColor);
+                }
+            }
+        }
+        function getRandomColor() {
+            return Math.floor(Math.random() * 256);
+        }
+
+        function inverseColors(){
+            return {
+                red: 255 - color.red, 
+                green: 255 - color.green, 
+                blue: 255 - color.blue
+            }
+        }
+
+        function getMiddleColor(color1, color2){
+            return {
+                red: Math.floor((color1.red + color2.red) / 2), 
+                green: Math.floor((color1.green + color2.green) / 2), 
+                blue: Math.floor((color1.blue + color2.blue) / 2 )
+            }
+        }
+    </script>
+</body>
+
+</html>
