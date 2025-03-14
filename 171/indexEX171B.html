@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.171B</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: grid;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        grid-template-columns: auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //model
+        let color = {
+            red: getRandomColor(),
+            green: getRandomColor(),
+            blue: getRandomColor()
+        }
+        let invertedColor = inverseColors(); 
+        let colors = [];
+        let lengthOfColors = 1;
+        fillColors(); 
+
+        updateView();
+        function updateView() {
+            let element = document.getElementById("app"); 
+            for (color of colors){
+                element.innerHTML += /*HTML*/`
+                <div style = "width: 150px; height: 150px; background-color: rgb(${color.red}, ${color.green}, ${color.blue})">
+                    Red: ${color.red}, <br>
+                    Green: ${color.green}, <br>
+                    Blue: ${color.blue}
+                    </div>
+                `;
+            }
+        }
+
+        function fillColors() {
+            for (let i = 0; i < lengthOfColors; i++) {
+                colors.push(color);
+            }
+            colors.push(invertedColor);
+        }
+        function getRandomColor() {
+            return Math.floor(Math.random() * 256 + 1);
+        }
+
+        function inverseColors(){
+            return {
+                red: 255 - color.red, 
+                green: 255 - color.green, 
+                blue: 255 - color.blue, 
+            }
+        }
+    </script>
+</body>
+
+</html>

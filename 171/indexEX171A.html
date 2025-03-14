@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.171A</title>
+</head>
+<style>
+    #app,
+    #app2 {
+        display: grid;
+        height: 300px;
+        overflow-wrap: break-word;
+        border: 2px solid azure;
+        background-color: antiquewhite;
+        grid-template-columns: auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto;
+    }
+
+    #app,
+    #app2>h1 {
+        color: rgb(13, 66, 68);
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //model
+        let color = {
+            red: getRandomColor(),
+            green: getRandomColor(),
+            blue: getRandomColor()
+        }
+        let colors = [];
+        let lengthOfColors = 15;
+        fillColors(); 
+
+        updateView();
+        function updateView() {
+            let element = document.getElementById("app"); 
+            for (color of colors){
+                element.innerHTML += /*HTML*/`
+                <div style = "width: 50px; height: 50px; background-color: rgb(${color.red}, ${color.green}, ${color.blue})">1</div>
+                `;
+            }
+        }
+
+        function fillColors() {
+            for (let i = 0; i < lengthOfColors; i++) {
+                colors.push({
+                    red: getRandomColor(),
+                    green: getRandomColor(),
+                    blue: getRandomColor()
+                }
+                )
+            }
+        }
+        function getRandomColor() {
+            return Math.floor(Math.random() * 256 + 1);
+        }
+    </script>
+</body>
+
+</html>
