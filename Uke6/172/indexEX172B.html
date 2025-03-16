@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User generator</title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 3px solid gray;
+        text-align: center;
+        padding: 4px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        //model
+        let toDoLines = [
+            { id: 0, text: 'testText', responsible: 'A', isDone: false, doneDate: '' },
+            { id: 1, text: 'testText', responsible: 'B', isDone: false, doneDate: '' },
+            { id: 2, text: 'testText', responsible: 'C', isDone: false, doneDate: '' },
+        ]
+        updoneDateView();
+
+        //view
+        function updoneDateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            ${createUsersTableHtml()}
+            `;
+        }
+
+        function createUsersTableHtml() {
+            return /*HTML*/`                
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Task to do</th>
+                        <th>Responsible</th>
+                        <th>Due date</th>
+                        <th>Done</th>
+                    </tr>
+                    ${createToDoRowsHtml()}
+                </table>
+            `;
+        }
+
+        function createToDoRowsHtml() {
+            let html = ``;
+            for (let todo of toDoLines) {
+                console.log(todo);
+                html += /*HTML*/`
+                 <tr>
+                    <td>${todo.id}</td>
+                    <td>${todo.text}</td>
+                    <td>${todo.responsible}</td>
+                    <td>${todo.doneDate}</td>
+                    <td><input type = "checkbox" ${todo.isDone ? "checked" : ""} onclick = "setCheck(${todo.id}, ${todo.isDone})"></td>
+                </tr>              
+                `;
+            }
+            html += '';
+            return html;
+        }
+
+        //controller
+
+        function setCheck(id, isDone) {
+            for (let todo of toDoLines) {
+                if (todo.id == id) {
+                    if (!isDone) {
+                        todo.doneDate = new Date().toLocaleString();
+                        todo.isDone = true;
+                    } else {
+                        todo.doneDate = "";
+                        todo.isDone = false;
+                    }
+                }
+            }
+            updoneDateView();
+        }
+    </script>
+</body>
+
+</html>

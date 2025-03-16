@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User generator</title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 3px solid gray;
+        text-align: center;
+        padding: 4px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        //model regular
+        let tasksToDo = [
+            { id: 0, text: 'testText', responsible: 'A', isDone: false, doneDate: '' },
+            { id: 1, text: 'testText', responsible: 'B', isDone: false, doneDate: '' },
+            { id: 2, text: 'testText', responsible: 'C', isDone: false, doneDate: '' },
+        ];
+        let page = "list";
+
+        //model inputs
+        let addTodoText = '';
+        let addTodoResponsible = '';
+        updateView();
+
+        //view
+        function updateView() {
+            if (page == "list") {
+                document.getElementById("app").innerHTML = /*HTML*/`
+            ${createToDoTableButtonsHtml()}
+            `;
+            }
+            else if (page == 'adduser') {
+                document.getElementById("app").innerHTML = /*HTML*/`
+                ${createAddUserHtml()}
+            `;
+            }
+        }
+
+        function createToDoTableButtonsHtml() {
+            return /*HTML*/`                
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Task to do</th>
+                        <th>Responsible</th>
+                        <th>Due date</th>
+                        <th>Done</th>
+                        <th>Delete task</th>
+                    </tr>
+                    ${createToDoRowsHtml()}
+                </table>
+     
+            <button id = "add" onclick = "setPage('adduser')" >Add new task</button>
+            `;
+        }
+
+        function createToDoRowsHtml() {
+            let html = ``;
+            for (let todo of tasksToDo) {
+                console.log(todo);
+                html += /*HTML*/`
+                 <tr>
+                    <td>${todo.id}</td>
+                    <td>${todo.text}</td>
+                    <td>${todo.responsible}</td>
+                    <td>${todo.doneDate}</td>
+                    <td><input type = "checkbox" ${todo.isDone ? "checked" : ""} onclick = "setCheck(${todo.id}, ${todo.isDone})"></td>
+                    <td><button onclick = "deleteTask(${todo.id})">X</td>
+                </tr>              
+                `;
+            }
+            html += '';
+            return html;
+        }
+
+        function createAddUserHtml() {
+            return /*HTML*/`
+                <label for="fname">Task to do:</label><br>
+                <input type="text" id="textTodo" name="textTodo" oninput = "addTodoText = this.value"><br>
+                <label for="lname">Responsible person:</label><br>
+                <input type="text" id="responsibleTodo" name="responsibleTodo" oninput = "addTodoResponsible = this.value"><br><br>
+                <button id = "usr" onclick = "addToDo()">Add user</button>
+            `;
+        }
+
+
+        //controller
+
+        function setCheck(id, isDone) {
+            for (let todo of tasksToDo) {
+                if (todo.id == id) {
+                    if (!isDone) {
+                        todo.doneDate = new Date().toLocaleString();
+                        todo.isDone = true;
+                    } else {
+                        todo.doneDate = "";
+                        todo.isDone = false;
+                    }
+                }
+            }
+            updateView();
+        }
+        function deleteTask(id) {
+            idForSplice = getCorrectId(id);
+            tasksToDo.splice(idForSplice, 1);
+            updateView();
+        }
+
+        function getCorrectId(id){
+            for (let i = 0; i < tasksToDo.length; i++){
+                if(tasksToDo[i].id == id){
+                    return i; 
+                }
+            }
+        }
+
+        function addToDo() {
+           if (addTodoText.length > 0 && addTodoResponsible.length > 0){
+            let newTask = {
+                id: getNewTaskId(),
+                text: addTodoText,
+                responsible: addTodoResponsible,
+                isDone: false,
+                doneDate: ''
+            }
+            tasksToDo.push(newTask);
+            setPage('list');
+            addTodoText = '';
+            addTodoResponsible = '';
+           }
+        }
+
+        function setPage(newPageName) {
+            page = newPageName;
+            updateView();
+        }
+
+        function getNewTaskId(){
+            let max = 0; 
+            for (const task of tasksToDo) {
+                if (task.id > max){
+                    max = task.id; 
+                }
+            }
+            return max + 1; 
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User generator</title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 3px solid gray;
+        text-align: center;
+        padding: 4px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        //model regular
+        let tasksToDo = [
+            { id: 0, text: 'Do dishes', responsible: 'Andrew', isDone: false, doneDate: '', notToShow: false },
+            { id: 1, text: 'Go with dog for a walk', responsible: 'Andrew', isDone: false, doneDate: '', notToShow: false },
+            { id: 2, text: 'Argue about Andrew has to many tasks', responsible: 'Andrew + Daria', isDone: false, doneDate: '', notToShow: false },
+            { id: 3, text: 'Throw thrash', responsible: 'Andrew', isDone: false, doneDate: '', notToShow: false },
+            { id: 4, text: 'Be cute', responsible: 'Daria', isDone: false, doneDate: '', notToShow: false },
+            { id: 5, text: 'Do something', responsible: 'Andrew + Daria', isDone: false, doneDate: '', notToShow: false },
+        ];
+
+        let uniqueResponsibles = [];
+        let page = "list";
+
+        //model inputs
+        let addTodoText = '';
+        let addTodoResponsible = '';
+        let editText = '';
+        let editResponsible = '';
+        let filterByResponsible = '';
+
+        updateView();
+
+        //view
+        function updateView() {
+            if (page == "list") {
+                document.getElementById("app").innerHTML = /*HTML*/`
+            ${createToDoTableButtonsHtml()}
+            `;
+            }
+            else if (page == 'adduser') {
+                document.getElementById("app").innerHTML = /*HTML*/`
+                ${createAddTaskHtml()}
+            `;
+            }
+        }
+
+        function createToDoTableButtonsHtml() {
+            getUniqueResponsiblePersons();
+            return /*HTML*/`                
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Task to do</th>
+                        <th>Responsible</th>
+                        <th>Due date</th>
+                        <th>Done</th>
+                        <th>Delete task</th>
+                    </tr>
+                    ${createToDoRowsHtml()}
+                </table>
+     
+            <div style = "margin-top: 10px">
+                <button id = "add" onclick = "setPage('adduser')"  >Add new task</button><br>
+                ${createSelectResponsibles()}<br>
+                <button id = "sortA" onclick = "sortList('date')"  >Sort list by date</button><br>
+                <button id = "sort" onclick = "sortList('id')"  >Sort list by id</button><br>
+             </div>   
+            `;
+        }
+
+        function createSelectResponsibles() {
+            let listOfResponsibles = /*HTML*/`
+            <label for="resps">Choose a responsible person:</label>
+            <select name = "resp" id = "resps" onchange = "filterByResponsible = this.value, rewriteList()">
+                `;
+            for (const element of uniqueResponsibles) {
+                listOfResponsibles += /*HTML*/`
+                <option value = "${element}">${element}</option>
+                `;
+            }
+            listOfResponsibles += `</select>`
+            return listOfResponsibles;
+        }
+
+        function createToDoRowsHtml() {
+            let html = ``;
+            for (let todo of tasksToDo) {
+                if (!todo.notToShow) {
+                    // console.log(todo);
+                    html += /*HTML*/`
+                 <tr>
+                    <td>${todo.id}</td>
+                    ${returnHardRows(todo)}
+                    <td>${todo.doneDate}</td>
+                    <td><input type = "checkbox" ${todo.isDone ? "checked" : ""} onclick = "setCheck(${todo.id}, ${todo.isDone})"></td>
+                    <td><button onclick = "deleteTask(${todo.id})">X</td>
+                </tr>              
+                `;
+                }
+            }
+            html += '';
+            return html;
+        }
+
+        function returnHardRows(todo) {
+
+            let rowsHtml = ``;
+            if (todo.editText) {
+                rowsHtml = /*HTML*/`
+                        <td><input type = "text" value = "${todo.text}" oninput = "editText = this.value">
+                        <br>
+                        <button onclick = "saveEdited(${todo.id}, 'text')">Save task</button>
+                        </td>
+                        <td>${todo.responsible}<br>
+                        <button onclick = "changeType(${todo.id}, 'responsible')" disabled>Edit responsible</button>
+                        </td>
+            `;
+            }
+            else if (todo.editResponsible) {
+                rowsHtml = /*HTML*/`
+                        <td>${todo.text}<br>
+                        <button onclick = "changeType(${todo.id}, 'text')" disabled>Edit task</button>
+                        </td>
+                        <td><input type = "text" value = "${todo.responsible}" oninput = "editResponsible = this.value"><br>
+                        <button onclick = "saveEdited(${todo.id}, 'responsible')">Save responsible</button>
+                        </td>
+                `;
+            }
+            else {
+                rowsHtml = /*HTML*/`
+                        <td>${todo.text}<br>
+                        <button onclick = "changeType(${todo.id}, 'text')">Edit task</button>
+                        </td>
+                        <td>${todo.responsible}<br>
+                        <button onclick = "changeType(${todo.id}, 'responsible')">Edit responsible</button>
+                        </td>
+                `;
+            }
+            return rowsHtml;
+        }
+
+
+        function createAddTaskHtml() {
+            return /*HTML*/`
+                <label for="fname">Task to do:</label><br>
+                <input type="text" id="textTodo" name="textTodo" oninput = "addTodoText = this.value"><br>
+                <label for="lname">Responsible person:</label><br>
+                <input type="text" id="responsibleTodo" name="responsibleTodo" oninput = "addTodoResponsible = this.value"><br><br>
+                <button id = "usr" onclick = "addToDo()">Add user</button>
+            `;
+        }
+
+
+        //controller
+
+        function setCheck(id, isDone) {
+            for (let todo of tasksToDo) {
+                if (todo.id == id) {
+                    if (!isDone) {
+                        todo.doneDate = new Date().toLocaleString();
+                        todo.isDone = true;
+                    } else {
+                        todo.doneDate = "";
+                        todo.isDone = false;
+                    }
+                }
+            }
+            updateView();
+        }
+        function deleteTask(id) {
+            idForSplice = getCorrectId(id);
+            tasksToDo.splice(idForSplice, 1);
+            updateView();
+        }
+
+        function getCorrectId(id) {
+            for (let i = 0; i < tasksToDo.length; i++) {
+                if (tasksToDo[i].id == id) {
+                    return i;
+                }
+            }
+        }
+
+        function addToDo() {
+            if (addTodoText.length > 0 && addTodoResponsible.length > 0) {
+                let newTask = {
+                    id: getNewTaskId(),
+                    text: addTodoText,
+                    responsible: addTodoResponsible,
+                    isDone: false,
+                    doneDate: ''
+                }
+                tasksToDo.push(newTask);
+                setPage('list');
+                addTodoText = '';
+                addTodoResponsible = '';
+            }
+        }
+
+        function setPage(newPageName) {
+            page = newPageName;
+            updateView();
+        }
+
+        function getNewTaskId() {
+            let max = 0;
+            for (const task of tasksToDo) {
+                if (task.id > max) {
+                    max = task.id;
+                }
+            }
+            return max + 1;
+        }
+
+        function changeType(id, field) {
+            let idToChange = getCorrectId(id);
+            if (field == "text") {
+                tasksToDo[idToChange].editText = true;
+            }
+            else {
+                tasksToDo[idToChange].editResponsible = true;
+            }
+            updateView();
+        }
+
+        function saveEdited(id, fieldToChange) {
+            let idToChange = getCorrectId(id);
+            if (fieldToChange == "text") {
+                tasksToDo[idToChange].text = editText;
+                tasksToDo[idToChange].editText = false;
+            }
+            else {
+                tasksToDo[idToChange].responsible = editResponsible;
+                tasksToDo[idToChange].editResponsible = false;
+            }
+
+            updateView();
+            editText = '';
+            editResponsible = '';
+        }
+
+        function getUniqueResponsiblePersons() {
+            uniqueResponsibles = [];
+            uniqueResponsibles.push('Select responsible');
+            uniqueResponsibles.push('View all');
+            for (const task of tasksToDo) {
+                if (!uniqueResponsibles.includes(task.responsible)) {
+                    uniqueResponsibles.push(task.responsible);
+                }
+            }
+        }
+
+        function rewriteList() {
+            for (const task of tasksToDo) {
+                task.notToShow = false;
+            }
+            //this is a way better, than creation of doubled list
+            if (filterByResponsible != 'Select responsible' && filterByResponsible != "View all") {
+                for (const task of tasksToDo) {
+                    if (task.responsible != filterByResponsible) {
+                        task.notToShow = true;
+                    }
+                }
+            }
+            updateView();
+            filterByResponsible = '';
+        }
+
+        function sortList(wayOfSort){
+                if (wayOfSort == 'id'){
+                    tasksToDo.sort(
+                    function (a,b){
+                        if(a.id == b.id) return 0;
+                        if(a.id  > b.id) return 1;
+                        else return -1;
+                    }
+                );
+                }
+                else if (wayOfSort == 'date'){
+                    tasksToDo.sort(
+                    function (a,b){
+                        dateA = Date.parse(a.doneDate); //timestamps are comparable enough.
+                        dateB = Date.parse(b.doneDate); 
+                        console.log(dateA); 
+                        console.log(dateB); 
+                        if(dateA == dateB) return 0;
+                        if(dateA  > dateB) return 1;
+                        else return -1;
+                    }
+                );
+                }
+            updateView();
+        }
+    </script>
+</body>
+
+</html>
