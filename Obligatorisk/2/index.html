@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User generator</title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 3px solid gray;
+        text-align: center;
+        padding: 4px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        //model
+        let userNames = ["Dag", "Roger", "Rolf", "Espen", "Per88"];
+        let usersDatabase = [];
+        let amountOfUsersToGenerate = userNames.length;
+
+        updateView();
+
+        //view
+        function updateView() {
+            document.getElementById("app").innerHTML = /*HTML*/`
+            ${createUsersTableHtml()}
+            `;
+        }
+
+        function createUsersTableHtml() {
+            generateUsersDatabase();
+            return /*HTML*/`                
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <th>Users type</th>
+                        <th>Users mail</th>
+                        <th>Users password</th>
+                    </tr>
+                    ${createUsersRowsHtml()}
+                </table>
+            `;
+        }
+
+        function createUsersRowsHtml() {
+            let html = ``;
+            for (let user of usersDatabase) {
+                html += /*HTML*/`
+                 <tr>
+                    <td>${user.userName}</td>
+                    <td>${user.usersType}</td>
+                    <td>${user.usersMail}</td>
+                    <td>${user.usersPassword}</td>
+                </tr>              
+                `;
+            }
+            html += '';
+            return html;
+        }
+
+         //controller
+         function generateUsersDatabase() {
+            for (let i = 0; i < amountOfUsersToGenerate; i++) {
+                let userName = getRandomUserName();
+                usersDatabase.push({
+                    userName: userName,
+                    usersType: getTypeOfUser(),
+                    usersMail: getUsersMail(userName),
+                    usersPassword: getUsersPassword()
+                });
+            }
+        }
+
+        function getRandomUserName() {
+            return userNames[Math.floor(Math.random() * amountOfUsersToGenerate)];
+        }
+        function getTypeOfUser() {
+            return Math.random() > 0.5 ? "Admin" : "User";
+        }
+        function getUsersMail(userName) {
+            return userName.toLowerCase() + "@totallygetacademy.no";
+        }
+        function getUsersPassword() {
+            return Math.random().toString(36).substring(2, 8);
+        }
+
+    </script>
+</body>
+</html>
