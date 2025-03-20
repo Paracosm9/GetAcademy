@@ -1,3 +1,6 @@
+
+
+//refers to slides 9+ here: https://docs.google.com/presentation/d/1j5THJgvW3jwXgktVzCeQgfW8S6FZmZyifF3xMHFr6zM/edit#slide=id.g341704642c1_7_13
 const model = {
     app: {
         currentpage: 'dashboard',
