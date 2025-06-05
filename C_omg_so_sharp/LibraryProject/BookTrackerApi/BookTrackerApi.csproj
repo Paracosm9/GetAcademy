@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.16" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\appsettings.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\BookTrackerApi.deps.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\BookTrackerApi.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\ConsoleTester\obj\ConsoleTester.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\ConsoleTester\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\obj\ConsoleTester.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\obj\Debug\net8.0\ConsoleTester.sourcelink.json" />
+    <_ContentIncludedByDefault Remove="ConsoleTester\obj\project.assets.json" />
+  </ItemGroup>
+
+</Project>
