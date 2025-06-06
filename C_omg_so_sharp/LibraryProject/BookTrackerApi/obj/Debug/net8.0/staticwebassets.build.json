@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "QfiHzTOwDoUo/jbhVH5NofJifZTvNxUfTWNWKvqamlg=",
+  "Hash": "LqxmQQFHdHOPxvsmOyRhcNHZU/K1PeLOyyDhpWRF9K8=",
   "Source": "BookTrackerApi",
   "BasePath": "_content/BookTrackerApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

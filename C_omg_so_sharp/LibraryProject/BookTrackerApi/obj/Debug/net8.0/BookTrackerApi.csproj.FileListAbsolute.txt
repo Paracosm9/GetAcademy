@@ -33,3 +33,6 @@
 /home/lemni/Projects/GetAcademy/C_omg_so_sharp/LibraryProject/BookTrackerApi/obj/Debug/net8.0/BookTrackerApi.genruntimeconfig.cache
 /home/lemni/Projects/GetAcademy/C_omg_so_sharp/LibraryProject/BookTrackerApi/obj/Debug/net8.0/ref/BookTrackerApi.dll
 /home/lemni/Projects/GetAcademy/C_omg_so_sharp/LibraryProject/BookTrackerApi/bin/Debug/net8.0/Other/TestBook.json
+/home/lemni/Projects/GetAcademy/C_omg_so_sharp/LibraryProject/BookTrackerApi/bin/Debug/net8.0/BookTrackerApi.staticwebassets.endpoints.json
+/home/lemni/Projects/GetAcademy/C_omg_so_sharp/LibraryProject/BookTrackerApi/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/home/lemni/Projects/GetAcademy/C_omg_so_sharp/LibraryProject/BookTrackerApi/obj/Debug/net8.0/staticwebassets/msbuild.BookTrackerApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

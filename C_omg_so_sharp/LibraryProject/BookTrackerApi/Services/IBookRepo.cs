@@ -6,5 +6,7 @@ public interface IBookRepo
 	public List<Book> GetAllBooks();
 	
 	public Book GetBookById(int id);
-	
+
+	public List<Book> GetFilteredBooks(Dictionary<string, string> query); 
+
 }

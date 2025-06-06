@@ -1,6 +1,7 @@
 using System.Text.Json;
 using BookTrackerApi;
 using BookTrackerApi.Services;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IBookRepo, PlugForDatabase>(); // ChatGPT offered. 
+builder.Services.AddSingleton<BookService>();
 
 var app = builder.Build();
 
@@ -33,10 +35,24 @@ app.MapPost("/smalllibraryAdd", (Book book) =>
         return Results.Ok(book);
     }
     ).WithName("AddBookToLibrary").WithOpenApi();
+
+
 app.MapGet(
 "/smalllibrary/{id}", (int id) =>
     
         new BookService(new PlugForDatabase()).GetBookById(id)).WithName("GetBookById").WithOpenApi();
+
+app.MapGet("/smalllibraryFilter", (HttpRequest request) =>
+    {
+        Dictionary<String, String> filters = new Dictionary<string, string>();
+        foreach (var key in request.Query.Keys)
+        {
+            filters.Add(key, request.Query[key]);
+        }
+        return Results.Ok(new BookService(new PlugForDatabase()).GetFilteredBooks(filters));
+    })
+    
+    .WithName("QueryStrings").WithOpenApi();
 
 app.Run();
 

@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace BookTrackerApi.Services;
 
 public class PlugForDatabase : IBookRepo
@@ -45,12 +47,11 @@ public class PlugForDatabase : IBookRepo
 		  "https://example.com/download/rezero1",
 		  "Re:Zero",
 		  "Reading",
-		  "Ongoing")
-	  };
+		  "Ongoing") };
 
 	public void AddBook(Book book)
 	{
-		 book.Id = GetNewId();
+		book.Id = GetNewId();
 		_books.Add(book);
 	}
 
@@ -67,5 +68,39 @@ public class PlugForDatabase : IBookRepo
 	public Book GetBookById(int id)
 	{
 		return _books.FirstOrDefault(book => book.Id == id) ?? throw new KeyNotFoundException();
+	}
+
+
+	public List<Book> GetFilteredBooks(Dictionary<string, string> query)
+	{
+		List<Book> filteredBooks = _books;
+
+		foreach (var (key, value) in query)
+		{
+				if (key.ToLower() == "orderby") continue;
+				Console.WriteLine(key);
+				var property = typeof(Book).GetProperty(key,
+					BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance); //chatGPT
+				if (property == null) continue;
+				filteredBooks = (from book in filteredBooks
+								let valueFromObject = property.GetValue(book)
+								where valueFromObject != null && valueFromObject.ToString() == value
+								select book).ToList();
+		}
+
+		if (query.TryGetValue("orderBy", out var orderBy))
+		{
+			var orderProp = typeof(Book).GetProperty(orderBy,
+				BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+			if (orderProp != null)
+			{
+				filteredBooks = (from book in filteredBooks
+					let value = orderProp.GetValue(book)
+					orderby value
+					select book).ToList();
+			}
+		}
+		filteredBooks = filteredBooks.ToList();
+		return filteredBooks;
 	}
 }

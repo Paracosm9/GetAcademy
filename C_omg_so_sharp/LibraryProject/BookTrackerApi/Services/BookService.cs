@@ -21,4 +21,9 @@ public class BookService
 	{
 		return _repository.GetBookById(id);
 	}
+
+	public List<Book> GetFilteredBooks(Dictionary<string, string> query)
+	{
+		return _repository.GetFilteredBooks(query);
+	}
 }
