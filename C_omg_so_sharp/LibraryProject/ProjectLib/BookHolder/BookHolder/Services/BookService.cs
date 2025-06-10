@@ -1,9 +1,8 @@
-namespace BookTrackerApi.Services;
+namespace BookHolder;
 
 public class BookService 
 
 {
-	
 	private IBookRepo _repository; 
 	public BookService(IBookRepo repository)
 	{
@@ -13,16 +12,16 @@ public class BookService
 	{
 		_repository.AddBook(book);
 	}
-	public List<Book> GetAllBooks()
+	public Task<List<Book>> GetAllBooks()
 	{
 		return _repository.GetAllBooks();
 	}
-	public Book GetBookById(int id)
+	public Task<Book> GetBookById(int id)
 	{
 		return _repository.GetBookById(id);
 	}
 
-	public List<Book> GetFilteredBooks(Dictionary<string, string> query)
+	public Task<List<Book>> GetFilteredBooks(Dictionary<string, string> query)
 	{
 		return _repository.GetFilteredBooks(query);
 	}

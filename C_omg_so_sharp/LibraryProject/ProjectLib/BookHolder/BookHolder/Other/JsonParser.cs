@@ -1,7 +1,7 @@
-using System.Text.Json;
-using BookTrackerApi.Services;
 
-namespace BookTrackerApi;
+using System.Text.Json;
+
+namespace BookHolder;
 
 public class JsonParser
 {

@@ -1,8 +1,8 @@
 using System.Reflection;
 
-namespace BookTrackerApi.Services;
+namespace BookHolder;
 
-public class PlugForDatabase : IBookRepo
+public class PlugForDatabase 
 
 
 {
@@ -102,5 +102,15 @@ public class PlugForDatabase : IBookRepo
 		}
 		filteredBooks = filteredBooks.ToList();
 		return filteredBooks;
+	}
+
+	public void UpdateBook(Book book)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void DeleteBook(int id)
+	{
+		throw new NotImplementedException();
 	}
 }

@@ -1,4 +1,4 @@
-namespace BookTrackerApi.Services;
+namespace BookHolder;
 
 public class Book
 {
@@ -39,5 +39,7 @@ public class Book
 		this.ReadingStatus = ReadingStatus;
 		this.PublishingStatus = PublishingStatus;
 	}
+	
+	public Book(){}
 	
 }
