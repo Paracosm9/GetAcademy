@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookHolder")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+334b8ede10213bcbe4a09cceed8d1836daacdd62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d69d3de8e24df51e2e9304a0ad89b673419e64ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookHolder")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookHolder")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,5 +1,7 @@
 namespace BookHolder;
 
+
+//lage et prosjekt - Dag
 public class Book
 {
 	public int Id { get; set; } // database? 
@@ -20,6 +22,10 @@ public class Book
 	public string PublishingStatus { get; set; } // Ongoing / Ended
 	// public Tier Tier { get; set; } // Tier: S / A+ / A / B / C / D / E
 
+
+	public string[] propertyNames =
+	[ "Id", "Title", "Desctiption", "CoverPath", "Status", "Notes", "Review", "AmountOfPages", "DownloadLink", "Serie", "ReadingStatus", "PublishingStatus" ];
+	
 	public Book(int Id, string Title,
 		string Description, string CoverPath,
 		string Status, string Notes, string Review, int AmountOfPages, string DownloadLink, string Serie,

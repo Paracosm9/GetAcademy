@@ -2,7 +2,7 @@ namespace BookHolder;
 
 public interface IBookRepo
 {
-	public void AddBook(Book book);
+	public Task AddBook(Book book);
 	public Task<List<Book>>GetAllBooks();
 	
 	public Task<Book> GetBookById(int id);
