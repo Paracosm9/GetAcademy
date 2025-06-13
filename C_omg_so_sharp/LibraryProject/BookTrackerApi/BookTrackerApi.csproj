@@ -11,6 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+<ItemGroup>
+  <ProjectReference Include="../ProjectLib/BookHolder/BookHolder/BookHolder.csproj" />
+</ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\appsettings.Development.json" />
     <_ContentIncludedByDefault Remove="ConsoleTester\bin\Debug\net8.0\appsettings.json" />
@@ -21,6 +24,10 @@
     <_ContentIncludedByDefault Remove="ConsoleTester\obj\ConsoleTester.csproj.nuget.dgspec.json" />
     <_ContentIncludedByDefault Remove="ConsoleTester\obj\Debug\net8.0\ConsoleTester.sourcelink.json" />
     <_ContentIncludedByDefault Remove="ConsoleTester\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Other\TestBook.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BookTrackerSolution.sln" />
   </ItemGroup>
 
 </Project>
